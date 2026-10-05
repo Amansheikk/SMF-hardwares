@@ -1,0 +1,3203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ColorVault Paints — Birla Opus Paint Dealer, Kolkata</title>
+<meta name="description" content="Authorized Birla Opus paint dealer in Kolkata. Book paint pickups, calculate quantities, browse shades online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Quattrocento',Georgia,serif;background:var(--cream);color:var(--ink);line-height:1.65;overflow-x:hidden;min-height:100vh}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font-family:inherit;font-size:inherit;border:none;outline:none;background:none}
+ul,ol{list-style:none}
+h1,h2,h3,h4,h5,h6{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.15;text-transform:uppercase;letter-spacing:0.02em}
+
+/* ===== CSS VARIABLES (DESIGN TOKENS) ===== */
+:root{
+  --rosewood:#BA274A;
+  --cream:#FFFECB;
+  --sky-surge:#5DB7DE;
+  --ink:#1A0E12;
+  --glass:rgba(255,255,255,0.10);
+  --glass-strong:rgba(255,255,255,0.14);
+  --font-display:'Archivo Black',sans-serif;
+  --font-structural:'Oswald',sans-serif;
+  --font-reading:'Quattrocento',Georgia,serif;
+  --nav-h:64px;
+  --radius:8px;
+  --radius-lg:14px;
+  --shadow-sm:0 1px 3px rgba(26,14,18,0.08);
+  --shadow-md:0 4px 16px rgba(26,14,18,0.10);
+  --shadow-lg:0 8px 32px rgba(26,14,18,0.14);
+  --transition:0.25s ease;
+}
+
+/* ===== TYPOGRAPHY ===== */
+.font-display{font-family:var(--font-display)}
+.font-struct{font-family:var(--font-structural)}
+.font-reading{font-family:var(--font-reading)}
+.eyebrow{font-family:var(--font-structural);font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--rosewood);margin-bottom:0.35rem}
+h1{font-size:clamp(2rem,6vw,3.8rem);font-weight:700}
+h2{font-size:clamp(1.5rem,4vw,2.5rem)}
+h3{font-size:clamp(1.15rem,2.5vw,1.5rem)}
+h4{font-size:1.1rem;font-weight:500}
+
+/* ===== COMPONENTS ===== */
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  font-family:var(--font-structural);font-weight:600;font-size:0.95rem;
+  text-transform:uppercase;letter-spacing:0.06em;
+  padding:0.75rem 1.75rem;border-radius:var(--radius);
+  cursor:pointer;transition:all var(--transition);
+  position:relative;overflow:hidden;
+}
+.btn-action{
+  background:var(--sky-surge);color:#fff;
+}
+.btn-action:hover{background:#4aa6ce;transform:translateY(-1px);box-shadow:var(--shadow-md)}
+.btn-action:active{transform:translateY(0)}
+.btn-outline{
+  border:2px solid var(--sky-surge);color:var(--sky-surge);background:transparent;
+}
+.btn-outline:hover{background:var(--sky-surge);color:#fff}
+.btn-white{
+  background:#fff;color:var(--rosewood);font-weight:700;
+}
+.btn-white:hover{background:var(--cream);transform:translateY(-1px)}
+.btn-rosewood{
+  background:var(--rosewood);color:#fff;
+}
+.btn-rosewood:hover{background:#a02040;transform:translateY(-1px)}
+.btn-sm{padding:0.5rem 1.1rem;font-size:0.82rem}
+.btn-icon{width:44px;height:44px;padding:0;justify-content:center;border-radius:50%}
+
+/* Cards */
+.card{
+  background:var(--cream);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);overflow:hidden;
+  transition:box-shadow var(--transition),transform var(--transition);
+}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+
+/* Glass panel (over Rosewood only) */
+.glass{
+  background:var(--glass-strong);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:var(--radius-lg);
+  border:1px solid rgba(255,255,255,0.08);
+}
+
+/* Badge */
+.badge{
+  display:inline-flex;align-items:center;gap:0.3rem;
+  font-family:var(--font-structural);font-size:0.72rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:0.08em;
+  padding:0.25rem 0.6rem;border-radius:20px;
+}
+.badge-stock{background:rgba(93,183,222,0.15);color:var(--sky-surge)}
+.badge-limited{background:rgba(26,14,18,0.08);color:var(--ink)}
+.badge-order{background:rgba(186,39,74,0.1);color:var(--rosewood)}
+
+/* Section spacing */
+.section{padding:4rem 1.25rem}
+.section-lg{padding:5rem 1.25rem}
+.container{max-width:1200px;margin:0 auto}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.25rem}
+
+/* Form elements */
+.form-group{margin-bottom:1.25rem}
+.form-label{
+  display:block;font-family:var(--font-structural);font-size:0.82rem;
+  font-weight:500;text-transform:uppercase;letter-spacing:0.06em;
+  margin-bottom:0.4rem;color:var(--ink);
+}
+.form-input{
+  width:100%;padding:0.75rem 1rem;
+  border:2px solid rgba(26,14,18,0.12);border-radius:var(--radius);
+  background:#fff;color:var(--ink);
+  transition:border-color var(--transition);
+}
+.form-input:focus{border-color:var(--sky-surge);box-shadow:0 0 0 3px rgba(93,183,222,0.15)}
+.form-input::placeholder{color:rgba(26,14,18,0.35)}
+select.form-input{cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%231A0E12' stroke-width='3'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 1rem center;
+}
+
+/* Divider */
+.divider{height:1px;background:rgba(26,14,18,0.08);margin:2rem 0}
+
+/* Swatch sheen hover */
+.swatch{
+  position:relative;overflow:hidden;cursor:pointer;
+  border-radius:var(--radius);transition:transform var(--transition);
+}
+.swatch::after{
+  content:'';position:absolute;inset:-50%;
+  background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,0.2) 50%,transparent 60%);
+  transform:translateX(-120%);transition:transform 0.5s ease;pointer-events:none;
+}
+.swatch:hover::after{transform:translateX(120%)}
+.swatch:hover{transform:scale(1.04)}
+
+/* ===== UNCUT OPENING SEQUENCE ===== */
+#uncut-overlay { -webkit-font-smoothing: antialiased; }
+.shutter-panel {
+  background-color: var(--rosewood);
+  background-image: repeating-linear-gradient(to bottom, transparent, transparent 48px, rgba(0, 0, 0, 0.15) 49px, rgba(0, 0, 0, 0.3) 50px);
+}
+#shutter-top { box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+#shutter-bottom { box-shadow: 0 -10px 30px rgba(0,0,0,0.5); }
+.glow-sky { box-shadow: 0 0 15px rgba(93, 183, 222, 0.8), 0 0 30px rgba(93, 183, 222, 0.4); }
+#skip-btn:hover { color: #ffffff !important; }
+
+/* ===== HEADER & NAV ===== */
+#header{
+  position:fixed;top:0;left:0;right:0;z-index:9000;
+  height:var(--nav-h);background:var(--cream);
+  border-bottom:1px solid rgba(26,14,18,0.06);
+  transition:box-shadow var(--transition);
+}
+#header.scrolled{box-shadow:var(--shadow-sm)}
+.header-inner{
+  max-width:1200px;margin:0 auto;height:100%;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;
+}
+.logo-text{
+  font-family:var(--font-structural);font-weight:700;font-size:1.2rem;
+  text-transform:uppercase;letter-spacing:0.04em;color:var(--ink);
+}
+.logo-text span{color:var(--rosewood)}
+
+.nav-links{display:none;gap:1.75rem;align-items:center}
+.nav-links a{
+  font-family:var(--font-structural);font-size:0.85rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:0.06em;color:var(--ink);
+  position:relative;transition:color var(--transition);
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;
+  background:var(--sky-surge);transition:width var(--transition);
+}
+.nav-links a:hover{color:var(--sky-surge)}
+.nav-links a:hover::after{width:100%}
+
+.nav-cta{
+  display:none;
+}
+.hamburger{
+  width:40px;height:40px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;cursor:pointer;
+  background:none;border:none;
+}
+.hamburger span{
+  display:block;width:22px;height:2px;background:var(--ink);
+  transition:all var(--transition);border-radius:1px;
+}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile menu */
+.mobile-menu{
+  position:fixed;top:var(--nav-h);left:0;right:0;bottom:0;
+  background:var(--cream);z-index:8999;
+  padding:2rem 1.5rem;
+  transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.22,0.61,0.36,1);
+  overflow-y:auto;
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{
+  display:block;font-family:var(--font-structural);font-size:1.15rem;
+  font-weight:500;text-transform:uppercase;letter-spacing:0.04em;
+  padding:1rem 0;border-bottom:1px solid rgba(26,14,18,0.06);
+  color:var(--ink);transition:color var(--transition);
+}
+.mobile-menu a:hover{color:var(--sky-surge)}
+.mobile-menu .mob-cta{margin-top:1.5rem}
+
+@media(min-width:768px){
+  .nav-links{display:flex}
+  .nav-cta{display:inline-flex}
+  .hamburger{display:none}
+}
+@media(min-width:1024px){
+  .nav-links{gap:2rem}
+}
+
+/* ===== PAGE VIEWS ===== */
+.page-view{display:none;min-height:calc(100vh - var(--nav-h));padding-top:var(--nav-h)}
+.page-view.active{display:block}
+
+/* ===== PAGE: HOME ===== */
+.home-hero{
+  background:var(--rosewood);color:#fff;
+  padding:clamp(3rem,8vw,6rem) 1.25rem;
+  position:relative;overflow:hidden;
+}
+.home-hero::before{
+  content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;
+  background:radial-gradient(ellipse,rgba(255,255,255,0.04),transparent 70%);
+  pointer-events:none;
+}
+.home-hero .container{position:relative;z-index:1}
+.home-hero h1{margin-bottom:0.75rem}
+.home-hero .hero-sub{
+  font-family:var(--font-reading);font-size:clamp(1rem,2vw,1.2rem);
+  opacity:0.85;max-width:540px;margin-bottom:2rem;line-height:1.7;
+}
+.hero-actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+
+/* Dealer strip */
+.dealer-strip{
+  background:var(--rosewood);padding:1rem 1.25rem;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+.dealer-strip .container{
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  flex-wrap:wrap;
+}
+.dealer-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.4rem 1rem;border-radius:20px;
+  background:var(--glass);border:1px solid rgba(255,255,255,0.1);
+  font-family:var(--font-structural);font-size:0.8rem;
+  font-weight:500;text-transform:uppercase;letter-spacing:0.06em;color:#fff;
+}
+.dealer-badge i{color:var(--sky-surge)}
+
+/* Value props */
+.value-props .prop{
+  text-align:center;padding:2rem 1.5rem;
+}
+.value-props .prop i{
+  font-size:1.8rem;color:var(--rosewood);margin-bottom:0.75rem;
+}
+.value-props .prop h3{margin-bottom:0.4rem;font-size:1.1rem}
+.value-props .prop p{font-size:0.92rem;color:rgba(26,14,18,0.7)}
+
+/* Category grid */
+.cat-card{
+  padding:2rem 1.5rem;border:2px solid rgba(26,14,18,0.06);
+  border-radius:var(--radius-lg);text-align:center;
+  cursor:pointer;transition:all var(--transition);
+  background:var(--cream);
+}
+.cat-card:hover{
+  border-color:var(--sky-surge);
+  box-shadow:var(--shadow-md);transform:translateY(-3px);
+}
+.cat-card .cat-icon{
+  width:64px;height:64px;margin:0 auto 1rem;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;
+}
+.cat-card h3{margin-bottom:0.3rem}
+.cat-card p{font-size:0.85rem;color:rgba(26,14,18,0.6)}
+.cat-card .cat-link{
+  display:inline-block;margin-top:0.75rem;
+  font-family:var(--font-structural);font-size:0.82rem;font-weight:600;
+  color:var(--sky-surge);text-transform:uppercase;letter-spacing:0.06em;
+  border-bottom:2px solid transparent;transition:border-color var(--transition);
+}
+.cat-card:hover .cat-link{border-color:var(--sky-surge)}
+
+/* Calculator teaser */
+.calc-teaser{
+  background:var(--ink);color:#fff;border-radius:var(--radius-lg);
+  padding:2.5rem 2rem;display:flex;align-items:center;gap:2rem;
+  flex-wrap:wrap;
+}
+.calc-teaser .calc-text{flex:1;min-width:240px}
+.calc-teaser h3{color:var(--cream);margin-bottom:0.5rem}
+.calc-teaser p{opacity:0.7;font-size:0.95rem}
+.calc-teaser .calc-visual{
+  font-size:3rem;opacity:0.3;
+}
+
+/* Essentials teaser */
+.essentials-strip{
+  padding:2.5rem 0;
+  border-top:1px solid rgba(26,14,18,0.06);
+  border-bottom:1px solid rgba(26,14,18,0.06);
+}
+.essentials-strip .essentials-label{
+  font-family:var(--font-structural);font-size:0.78rem;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:rgba(26,14,18,0.4);margin-bottom:1rem;
+}
+.essentials-grid{
+  display:flex;gap:1rem;overflow-x:auto;padding-bottom:0.5rem;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.essentials-grid::-webkit-scrollbar{display:none}
+.essentials-item{
+  flex:0 0 140px;padding:1rem;text-align:center;
+  border:1px solid rgba(26,14,18,0.08);border-radius:var(--radius);
+  transition:all var(--transition);cursor:default;
+}
+.essentials-item i{font-size:1.4rem;color:var(--ink);opacity:0.5;margin-bottom:0.4rem}
+.essentials-item span{font-family:var(--font-structural);font-size:0.78rem;font-weight:500;display:block}
+
+/* Offers banner */
+.offers-banner-home{
+  background:linear-gradient(135deg,var(--rosewood),#8a1d38);
+  color:#fff;padding:2.5rem 2rem;border-radius:var(--radius-lg);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.5rem;flex-wrap:wrap;
+}
+.offers-banner-home h3{color:var(--cream)}
+.offers-banner-home p{opacity:0.8;max-width:400px;font-size:0.95rem}
+
+/* Testimonial strip */
+.testimonial-strip{
+  background:rgba(26,14,18,0.03);border-radius:var(--radius-lg);
+  padding:2.5rem 2rem;
+}
+.testimonial-card{max-width:600px;margin:0 auto;text-align:center}
+.testimonial-card .stars{color:#D4A017;font-size:1rem;margin-bottom:0.75rem;letter-spacing:2px}
+.testimonial-card blockquote{
+  font-size:1.1rem;font-style:italic;line-height:1.7;
+  margin-bottom:1rem;color:var(--ink);
+}
+.testimonial-card cite{
+  font-family:var(--font-structural);font-size:0.85rem;
+  font-weight:500;font-style:normal;color:rgba(26,14,18,0.5);
+}
+
+/* Footer CTA band */
+.footer-cta{
+  background:var(--rosewood);color:#fff;
+  padding:3.5rem 1.25rem;text-align:center;
+}
+.footer-cta h2{color:var(--cream);margin-bottom:0.5rem}
+.footer-cta p{opacity:0.8;margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto}
+.footer-cta-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ===== PAGE: CATALOG ===== */
+.catalog-tabs{
+  display:flex;gap:0;overflow-x:auto;padding:0 1.25rem;
+  border-bottom:2px solid rgba(26,14,18,0.06);
+  scrollbar-width:none;
+}
+.catalog-tabs::-webkit-scrollbar{display:none}
+.catalog-tab{
+  font-family:var(--font-structural);font-size:0.85rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:0.05em;
+  padding:1rem 1.25rem;white-space:nowrap;cursor:pointer;
+  border-bottom:2px solid transparent;margin-bottom:-2px;
+  color:rgba(26,14,18,0.5);transition:all var(--transition);
+  background:none;border-left:none;border-right:none;border-top:none;
+}
+.catalog-tab:hover{color:var(--ink)}
+.catalog-tab.active{color:var(--sky-surge);border-bottom-color:var(--sky-surge)}
+.catalog-tab.essentials-tab{opacity:0.6;font-size:0.78rem}
+
+.catalog-filters{
+  padding:1rem 1.25rem;display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center;
+}
+.filter-chip{
+  font-family:var(--font-structural);font-size:0.78rem;font-weight:500;
+  padding:0.4rem 0.9rem;border-radius:20px;cursor:pointer;
+  border:1.5px solid rgba(26,14,18,0.12);color:rgba(26,14,18,0.6);
+  transition:all var(--transition);background:none;
+}
+.filter-chip:hover{border-color:var(--sky-surge);color:var(--sky-surge)}
+.filter-chip.active{background:var(--sky-surge);color:#fff;border-color:var(--sky-surge)}
+
+.catalog-grid{padding:1.25rem}
+.product-card{
+  background:var(--cream);border-radius:var(--radius-lg);
+  border:1px solid rgba(26,14,18,0.06);overflow:hidden;
+  transition:all var(--transition);
+}
+.product-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.product-card .shades-row{
+  display:flex;gap:4px;padding:1rem 1rem 0.5rem;flex-wrap:wrap;
+}
+.product-card .shade-dot{
+  width:28px;height:28px;border-radius:6px;cursor:pointer;
+  border:2px solid transparent;transition:all var(--transition);
+  position:relative;
+}
+.product-card .shade-dot:hover{transform:scale(1.15);border-color:var(--ink)}
+.product-card .shade-dot.light-swatch{border-color:rgba(26,14,18,0.15)}
+.product-card .card-body{padding:0.75rem 1rem 1rem}
+.product-card h4{margin-bottom:0.15rem;font-size:0.95rem}
+.product-card .finish-label{
+  font-family:var(--font-structural);font-size:0.72rem;
+  color:rgba(26,14,18,0.45);text-transform:uppercase;letter-spacing:0.06em;
+  margin-bottom:0.5rem;
+}
+.product-card .card-bottom{
+  display:flex;align-items:center;justify-content:space-between;gap:0.5rem;
+}
+.product-card .price{
+  font-family:var(--font-structural);font-weight:600;font-size:0.95rem;
+}
+.product-card .card-bottom .btn-sm{flex-shrink:0}
+
+/* Hardware cards (smaller) */
+.hardware-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem;border:1px solid rgba(26,14,18,0.06);
+  border-radius:var(--radius);background:var(--cream);
+  transition:all var(--transition);
+}
+.hardware-card:hover{box-shadow:var(--shadow-sm)}
+.hardware-card .hw-icon{
+  width:48px;height:48px;border-radius:var(--radius);
+  background:rgba(26,14,18,0.04);display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;color:rgba(26,14,18,0.4);flex-shrink:0;
+}
+.hardware-card .hw-info{flex:1}
+.hardware-card .hw-info h4{font-size:0.9rem;margin-bottom:0.1rem}
+.hardware-card .hw-info p{font-size:0.8rem;color:rgba(26,14,18,0.5)}
+.hardware-card .hw-price{
+  font-family:var(--font-structural);font-weight:600;font-size:0.9rem;
+  flex-shrink:0;
+}
+
+/* ===== PAGE: PRODUCT DETAIL ===== */
+.product-detail{padding:2rem 1.25rem}
+.product-detail .back-link{
+  font-family:var(--font-structural);font-size:0.85rem;font-weight:500;
+  color:var(--sky-surge);display:inline-flex;align-items:center;gap:0.4rem;
+  margin-bottom:1.5rem;cursor:pointer;transition:opacity var(--transition);
+}
+.product-detail .back-link:hover{opacity:0.7}
+.pd-top{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem}
+@media(max-width:640px){.pd-top{grid-template-columns:1fr}}
+.pd-shade-preview{
+  aspect-ratio:1;border-radius:var(--radius-lg);position:relative;
+  overflow:hidden;cursor:crosshair;
+}
+.pd-shade-preview .sheen{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,0.15) 50%,transparent 70%);
+  transform:translateX(-120%);transition:transform 0.6s ease;pointer-events:none;
+}
+.pd-shade-preview:hover .sheen{transform:translateX(120%)}
+.pd-info h1{font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:0.3rem}
+.pd-info .pd-code{
+  font-family:var(--font-structural);font-size:0.85rem;
+  color:rgba(26,14,18,0.5);margin-bottom:0.75rem;
+}
+.pd-info .pd-desc{margin-bottom:1.25rem;line-height:1.7}
+.pd-info .pd-coverage{
+  font-family:var(--font-structural);font-size:0.82rem;
+  color:rgba(26,14,18,0.5);margin-bottom:1.25rem;
+}
+.pack-sizes{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pack-btn{
+  font-family:var(--font-structural);font-size:0.82rem;font-weight:500;
+  padding:0.5rem 1rem;border-radius:var(--radius);cursor:pointer;
+  border:2px solid rgba(26,14,18,0.1);color:var(--ink);
+  transition:all var(--transition);background:#fff;
+}
+.pack-btn:hover{border-color:var(--sky-surge)}
+.pack-btn.active{border-color:var(--sky-surge);background:var(--sky-surge);color:#fff}
+
+/* Embedded calculator widget */
+.calc-widget{
+  background:rgba(26,14,18,0.03);border-radius:var(--radius-lg);
+  padding:1.5rem;margin-bottom:2rem;
+}
+.calc-widget h4{margin-bottom:1rem;font-size:0.95rem}
+.calc-widget .calc-row{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:0.75rem}
+.calc-widget .calc-row .form-group{flex:1;min-width:100px;margin-bottom:0}
+.calc-widget .calc-result{
+  font-family:var(--font-structural);font-size:1.1rem;font-weight:600;
+  color:var(--sky-surge);padding:0.75rem 0;
+}
+
+/* Bundle upsells */
+.bundle-row{
+  display:flex;gap:1rem;overflow-x:auto;padding-bottom:0.5rem;
+  scrollbar-width:none;margin-bottom:2rem;
+}
+.bundle-row::-webkit-scrollbar{display:none}
+.bundle-item{
+  flex:0 0 130px;padding:0.75rem;text-align:center;
+  border:1px solid rgba(26,14,18,0.08);border-radius:var(--radius);
+  font-size:0.8rem;
+}
+.bundle-item i{font-size:1.3rem;color:rgba(26,14,18,0.35);margin-bottom:0.3rem;display:block}
+.bundle-item .b-name{font-family:var(--font-structural);font-weight:500;display:block;margin-bottom:0.15rem}
+.bundle-item .b-price{color:rgba(26,14,18,0.5)}
+
+/* Other shades */
+.other-shades{margin-bottom:2rem}
+.other-shades h3{margin-bottom:1rem}
+.other-shades-grid{display:flex;gap:0.5rem;flex-wrap:wrap}
+.other-shade{
+  width:48px;height:48px;border-radius:var(--radius);cursor:pointer;
+  border:2px solid transparent;transition:all var(--transition);
+  position:relative;
+}
+.other-shade:hover{transform:scale(1.1);border-color:var(--ink)}
+.other-shade.light{border-color:rgba(26,14,18,0.12)}
+.other-shade .shade-tooltip{
+  position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:var(--ink);color:#fff;padding:0.25rem 0.5rem;border-radius:4px;
+  font-family:var(--font-structural);font-size:0.68rem;white-space:nowrap;
+  opacity:0;pointer-events:none;transition:opacity var(--transition);
+}
+.other-shade:hover .shade-tooltip{opacity:1}
+
+/* ===== PAGE: CALCULATOR ===== */
+.calc-page{padding:2rem 1.25rem;max-width:700px;margin:0 auto}
+.calc-page h1{margin-bottom:0.5rem}
+.calc-page .calc-intro{margin-bottom:2rem;color:rgba(26,14,18,0.7)}
+.calc-form-card{
+  background:#fff;border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);padding:2rem;margin-bottom:2rem;
+}
+.calc-form-card .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:480px){.calc-form-card .form-row{grid-template-columns:1fr}}
+.calc-output{
+  background:var(--ink);color:#fff;border-radius:var(--radius-lg);
+  padding:2rem;text-align:center;
+}
+.calc-output .calc-liters{
+  font-family:var(--font-structural);font-size:3rem;font-weight:700;
+  color:var(--sky-surge);line-height:1.2;
+}
+.calc-output .calc-liters span{font-size:1.2rem;color:var(--cream);font-weight:400}
+.calc-output .calc-packs{
+  font-family:var(--font-reading);font-size:1rem;opacity:0.7;margin:0.5rem 0 1.5rem;
+}
+.calc-output .calc-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ===== PAGE: BOOKING (UPGRADED MINIMAL FLEX LAYOUT) ===== */
+.booking-page{padding:1.5rem 1rem;max-width:600px;margin:0 auto}
+.booking-page h1{margin-bottom:0.25rem}
+.booking-page .booking-intro{margin-bottom:1.25rem;color:rgba(26,14,18,0.7);font-size:0.95rem}
+
+/* Booking progress */
+.booking-progress{
+  display:flex;align-items:center;justify-content:space-between;gap:0.25rem;margin-bottom:1.75rem;
+  padding:0 0.25rem;overflow-x:auto;scrollbar-width:none;
+}
+.booking-progress::-webkit-scrollbar{display:none}
+.bp-step{
+  display:flex;align-items:center;gap:0.4rem;
+  font-family:var(--font-structural);font-size:0.75rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:0.04em;color:rgba(26,14,18,0.35);
+  white-space:nowrap;flex-shrink:0;
+}
+.bp-step .bp-num{
+  width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  border:2px solid rgba(26,14,18,0.15);font-size:0.72rem;transition:all var(--transition);
+}
+.bp-step.active{color:var(--sky-surge)}
+.bp-step.active .bp-num{background:var(--sky-surge);color:#fff;border-color:var(--sky-surge)}
+.bp-step.done{color:rgba(26,14,18,0.6)}
+.bp-step.done .bp-num{background:rgba(26,14,18,0.08);border-color:transparent}
+.bp-line{flex:1;height:2px;background:rgba(26,14,18,0.08);min-width:12px;margin:0 0.25rem}
+
+/* Booking steps container */
+.booking-steps{overflow:hidden;width:100%}
+.booking-track{
+  display:flex;transition:transform 0.35s cubic-bezier(0.22,0.61,0.36,1);
+  width:100%;
+}
+.booking-step{
+  flex:0 0 100%;max-width:100%;padding:0;overflow:hidden;
+}
+
+/* Item recap */
+.recap-item{
+  display:flex;align-items:center;gap:0.85rem;
+  padding:0.85rem 1rem;background:#fff;border-radius:var(--radius);
+  border:1px solid rgba(26,14,18,0.06);margin-bottom:0.75rem;
+  box-shadow:var(--shadow-sm);
+}
+.recap-item .recap-swatch{
+  width:42px;height:42px;border-radius:6px;flex-shrink:0;
+  border:1px solid rgba(26,14,18,0.08);
+}
+.recap-item .recap-info{flex:1;min-width:0}
+.recap-item .recap-info h4{font-size:0.9rem;margin-bottom:0.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recap-item .recap-info p{font-size:0.8rem;color:rgba(26,14,18,0.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.recap-item .recap-remove{
+  color:rgba(26,14,18,0.3);cursor:pointer;font-size:0.95rem;padding:0.5rem;
+  transition:color var(--transition);background:none;border:none;flex-shrink:0;
+}
+.recap-item .recap-remove:hover{color:var(--rosewood)}
+
+.add-item-link{
+  display:flex;align-items:center;gap:0.5rem;
+  font-family:var(--font-structural);font-size:0.85rem;font-weight:600;
+  color:var(--sky-surge);padding:0.85rem;border:2px dashed rgba(93,183,222,0.35);
+  border-radius:var(--radius);cursor:pointer;transition:all var(--transition);
+  margin-bottom:1.5rem;justify-content:center;
+  background:#fff;width:100%;
+}
+.add-item-link:hover{background:rgba(93,183,222,0.04);border-color:var(--sky-surge)}
+
+/* Date/time picker */
+.date-grid{display:grid;grid-template-columns:repeat(7,minmax(38px,1fr));gap:0.35rem;margin-bottom:1.5rem;overflow-x:auto;padding-bottom:0.25rem;scrollbar-width:none;}
+.date-grid::-webkit-scrollbar{display:none;}
+
+.date-cell{
+  text-align:center;padding:0.6rem 0.2rem;border-radius:var(--radius);
+  border:1.5px solid rgba(26,14,18,0.08);cursor:pointer;
+  transition:all var(--transition);background:#fff;
+}
+.date-cell:hover{border-color:var(--sky-surge)}
+.date-cell.selected{border-color:var(--sky-surge);background:var(--sky-surge);color:#fff}
+.date-cell .day-name{font-family:var(--font-structural);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.06em;opacity:0.6;margin-bottom:0.15rem}
+.date-cell .day-num{font-family:var(--font-structural);font-size:1rem;font-weight:600}
+
+.time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:1.5rem}
+@media(max-width:480px){.time-grid{grid-template-columns:repeat(2,1fr)}}
+.time-cell{
+  text-align:center;padding:0.6rem;border-radius:var(--radius);
+  border:1.5px solid rgba(26,14,18,0.08);cursor:pointer;
+  font-family:var(--font-structural);font-size:0.82rem;font-weight:500;
+  transition:all var(--transition);background:#fff;
+}
+.time-cell:hover{border-color:var(--sky-surge)}
+.time-cell.selected{border-color:var(--sky-surge);background:var(--sky-surge);color:#fff}
+.time-cell.unavailable{opacity:0.35;cursor:not-allowed;pointer-events:none;background:rgba(26,14,18,0.04)}
+
+/* Review card */
+.review-card{
+  background:#fff;border-radius:var(--radius-lg);padding:1.25rem;
+  margin-bottom:1.25rem;border:1px solid rgba(26,14,18,0.08);
+  box-shadow:var(--shadow-sm);
+}
+.review-card h4{margin-bottom:0.75rem;font-size:0.9rem}
+.review-row{
+  display:flex;justify-content:space-between;padding:0.5rem 0;
+  border-bottom:1px solid rgba(26,14,18,0.05);font-size:0.9rem;gap:1rem;
+}
+.review-row:last-child{border-bottom:none}
+.review-row .label{color:rgba(26,14,18,0.5);flex-shrink:0}
+.review-row span:last-child{text-align:right}
+
+.booking-nav{display:flex;gap:1rem;justify-content:space-between;align-items:center;margin-top:1.5rem;padding-top:0.5rem}
+.booking-nav .btn-back{
+  font-family:var(--font-structural);font-size:0.82rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.04em;
+  color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:0.4rem;
+  background:none;border:none;padding:0.5rem 0;transition:color var(--transition);
+}
+.booking-nav .btn-back:hover{color:var(--sky-surge)}
+
+.whatsapp-check{
+  display:flex;align-items:flex-start;gap:0.6rem;
+  margin-top:1rem;font-size:0.85rem;color:rgba(26,14,18,0.65);cursor:pointer;
+}
+.whatsapp-check input{margin-top:0.15rem;accent-color:var(--sky-surge);cursor:pointer}
+
+
+/* ===== PAGE: BOOKING CONFIRMED ===== */
+.confirm-page{padding:3rem 1.25rem;text-align:center;max-width:560px;margin:0 auto}
+.confirm-check{
+  width:80px;height:80px;margin:0 auto 1.5rem;
+  position:relative;
+}
+.confirm-check svg{
+  width:100%;height:100%;
+}
+.confirm-check .brush-stroke{
+  stroke-dasharray:200;stroke-dashoffset:200;
+  animation:brushDraw 0.8s ease-out 0.3s forwards;
+}
+@keyframes brushDraw{to{stroke-dashoffset:0}}
+.confirm-check .check-mark{
+  stroke-dasharray:60;stroke-dashoffset:60;
+  animation:brushDraw 0.4s ease-out 0.9s forwards;
+}
+.confirm-page h1{margin-bottom:0.5rem;color:var(--ink)}
+.confirm-page .confirm-sub{color:rgba(26,14,18,0.6);margin-bottom:2rem}
+.confirm-details{
+  text-align:left;background:rgba(26,14,18,0.03);border-radius:var(--radius-lg);
+  padding:1.5rem;margin-bottom:1.5rem;
+}
+.confirm-details .review-row{padding:0.6rem 0}
+.confirm-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.confirm-note{
+  margin-top:2rem;font-size:0.85rem;color:rgba(26,14,18,0.4);
+  font-style:italic;
+}
+
+/* ===== PAGE: TRADE ===== */
+.trade-hero{
+  background:var(--ink);color:#fff;padding:clamp(3rem,8vw,5rem) 1.25rem;
+}
+.trade-hero h1{color:var(--cream);margin-bottom:0.75rem}
+.trade-hero p{opacity:0.7;max-width:560px;line-height:1.7}
+.trade-benefits{padding:3rem 1.25rem}
+.trade-benefits .benefit{
+  display:flex;gap:1.25rem;align-items:flex-start;
+  padding:1.5rem 0;border-bottom:1px solid rgba(26,14,18,0.06);
+}
+.trade-benefits .benefit:last-child{border-bottom:none}
+.trade-benefits .benefit i{
+  font-size:1.3rem;color:var(--rosewood);margin-top:0.15rem;flex-shrink:0;
+}
+.trade-benefits .benefit h3{font-size:1.05rem;margin-bottom:0.2rem}
+.trade-benefits .benefit p{font-size:0.92rem;color:rgba(26,14,18,0.6)}
+.trade-cta{
+  background:var(--rosewood);color:#fff;padding:3rem 1.25rem;text-align:center;
+}
+.trade-cta h2{color:var(--cream);margin-bottom:0.5rem}
+.trade-cta p{opacity:0.8;margin-bottom:1.5rem}
+
+/* ===== PAGE: STORE ===== */
+.store-page{padding:2rem 1.25rem}
+.store-page h1{margin-bottom:1.5rem}
+.map-container{
+  width:100%;height:300px;border-radius:var(--radius-lg);overflow:hidden;
+  background:rgba(26,14,18,0.05);margin-bottom:2rem;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.map-container iframe{width:100%;height:100%;border:0}
+.map-placeholder{
+  text-align:center;color:rgba(26,14,18,0.3);
+}
+.map-placeholder i{font-size:2.5rem;margin-bottom:0.5rem;display:block}
+.hours-table{max-width:400px;margin-bottom:2rem}
+.hours-table .hours-row{
+  display:flex;justify-content:space-between;padding:0.75rem 0;
+  border-bottom:1px solid rgba(26,14,18,0.06);
+  font-family:var(--font-structural);font-size:0.92rem;
+}
+.hours-table .hours-row .day{font-weight:500}
+.hours-table .hours-row .time{color:rgba(26,14,18,0.6)}
+.store-contacts{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* ===== PAGE: ABOUT ===== */
+.about-hero{
+  background:var(--rosewood);color:#fff;padding:clamp(3rem,8vw,5rem) 1.25rem;
+}
+.about-hero h1{color:var(--cream);margin-bottom:0.75rem}
+.about-hero p{opacity:0.85;max-width:600px;line-height:1.7}
+.about-content{padding:3rem 1.25rem}
+.about-content .about-block{margin-bottom:2.5rem}
+.about-content .about-block h2{margin-bottom:0.75rem}
+.about-content .about-block p{color:rgba(26,14,18,0.7);max-width:640px;line-height:1.8}
+.about-trust{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.5rem;
+  padding:2rem 1.25rem;max-width:700px;margin:0 auto 2rem;
+}
+.about-trust .trust-item{text-align:center;padding:1.5rem 1rem}
+.about-trust .trust-item .trust-num{
+  font-family:var(--font-structural);font-size:2.5rem;font-weight:700;
+  color:var(--rosewood);line-height:1.2;
+}
+.about-trust .trust-item .trust-label{
+  font-family:var(--font-structural);font-size:0.78rem;
+  text-transform:uppercase;letter-spacing:0.06em;color:rgba(26,14,18,0.5);margin-top:0.3rem;
+}
+
+/* ===== PAGE: REVIEWS ===== */
+.reviews-page{padding:2rem 1.25rem}
+.reviews-page h1{margin-bottom:0.5rem}
+.reviews-summary{
+  display:flex;align-items:center;gap:1.5rem;
+  margin-bottom:2.5rem;flex-wrap:wrap;
+}
+.reviews-summary .avg-rating{
+  font-family:var(--font-structural);font-size:3.5rem;font-weight:700;color:var(--ink);line-height:1;
+}
+.reviews-summary .rating-details{flex:1}
+.reviews-summary .stars{color:#D4A017;font-size:1.1rem;letter-spacing:2px;margin-bottom:0.3rem}
+.reviews-summary .total{font-size:0.88rem;color:rgba(26,14,18,0.5)}
+.review-card-full{
+  padding:1.5rem 0;border-bottom:1px solid rgba(26,14,18,0.06);
+}
+.review-card-full .rc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.review-card-full .rc-name{font-family:var(--font-structural);font-weight:600;font-size:0.95rem}
+.review-card-full .rc-date{font-size:0.82rem;color:rgba(26,14,18,0.4)}
+.review-card-full .rc-stars{color:#D4A017;font-size:0.85rem;margin-bottom:0.5rem;letter-spacing:1px}
+.review-card-full .rc-text{color:rgba(26,14,18,0.7);line-height:1.7}
+.reviews-cta{text-align:center;margin-top:2.5rem}
+
+/* ===== PAGE: OFFERS ===== */
+.offers-page{padding:2rem 1.25rem}
+.offers-page h1{margin-bottom:0.5rem}
+.offers-page .offers-intro{color:rgba(26,14,18,0.6);margin-bottom:2rem}
+.offer-card{
+  border:2px solid rgba(26,14,18,0.06);border-radius:var(--radius-lg);
+  padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden;
+}
+.offer-card::before{
+  content:'';position:absolute;top:0;left:0;width:6px;height:100%;
+  background:var(--rosewood);
+}
+.offer-card .offer-tag{
+  font-family:var(--font-structural);font-size:0.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.08em;
+  padding:0.2rem 0.6rem;border-radius:4px;
+  background:rgba(186,39,74,0.1);color:var(--rosewood);
+  display:inline-block;margin-bottom:0.75rem;
+}
+.offer-card h3{margin-bottom:0.4rem}
+.offer-card p{color:rgba(26,14,18,0.6);margin-bottom:1rem;max-width:500px}
+.offer-card .offer-validity{
+  font-family:var(--font-structural);font-size:0.78rem;
+  color:rgba(26,14,18,0.4);text-transform:uppercase;letter-spacing:0.04em;
+}
+
+/* ===== PAGE: CONTACT ===== */
+.contact-page{padding:2rem 1.25rem}
+.contact-page h1{margin-bottom:0.5rem}
+.contact-page .contact-intro{color:rgba(26,14,18,0.6);margin-bottom:2rem;max-width:500px}
+.faq-item{
+  border-bottom:1px solid rgba(26,14,18,0.06);overflow:hidden;
+}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 0;cursor:pointer;font-family:var(--font-structural);
+  font-size:1rem;font-weight:500;text-align:left;color:var(--ink);
+  background:none;border:none;transition:color var(--transition);
+}
+.faq-q:hover{color:var(--sky-surge)}
+.faq-q i{transition:transform var(--transition);color:rgba(26,14,18,0.3);flex-shrink:0;margin-left:1rem}
+.faq-item.open .faq-q i{transform:rotate(180deg);color:var(--sky-surge)}
+.faq-a{
+  max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.35s ease;
+}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:1.25rem}
+.faq-a p{color:rgba(26,14,18,0.6);line-height:1.7;max-width:560px}
+.contact-whatsapp{
+  margin-top:3rem;text-align:center;padding:2.5rem;
+  background:rgba(26,14,18,0.03);border-radius:var(--radius-lg);
+}
+.contact-whatsapp h3{margin-bottom:0.5rem}
+.contact-whatsapp p{color:rgba(26,14,18,0.6);margin-bottom:1.5rem;max-width:400px;margin-left:auto;margin-right:auto}
+
+/* ===== PAGE: OWNER DASHBOARD ===== */
+.owner-page{padding:2rem 1.25rem;max-width:900px;margin:0 auto}
+.owner-page h1{margin-bottom:0.25rem}
+.owner-page .owner-sub{color:rgba(26,14,18,0.5);margin-bottom:1.5rem;font-size:0.92rem}
+.owner-stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:1rem;
+  margin-bottom:2rem;
+}
+.owner-stat{
+  background:rgba(26,14,18,0.03);border-radius:var(--radius);
+  padding:1.25rem;text-align:center;
+}
+.owner-stat .os-num{
+  font-family:var(--font-structural);font-size:2rem;font-weight:700;color:var(--rosewood);
+}
+.owner-stat .os-label{
+  font-family:var(--font-structural);font-size:0.72rem;
+  text-transform:uppercase;letter-spacing:0.06em;color:rgba(26,14,18,0.4);margin-top:0.2rem;
+}
+.owner-bookings{margin-bottom:2rem}
+.owner-bookings h2{margin-bottom:1rem;font-size:1.3rem}
+.owner-table{width:100%;border-collapse:collapse}
+.owner-table th{
+  font-family:var(--font-structural);font-size:0.75rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.06em;color:rgba(26,14,18,0.4);
+  text-align:left;padding:0.75rem 0.5rem;border-bottom:2px solid rgba(26,14,18,0.08);
+}
+.owner-table td{
+  padding:0.75rem 0.5rem;border-bottom:1px solid rgba(26,14,18,0.05);
+  font-size:0.9rem;vertical-align:middle;
+}
+.owner-table .ot-shade{
+  display:inline-flex;align-items:center;gap:0.4rem;
+}
+.owner-table .ot-swatch{
+  width:20px;height:20px;border-radius:4px;display:inline-block;vertical-align:middle;
+  border:1px solid rgba(26,14,18,0.1);
+}
+.owner-table .ot-status{
+  font-family:var(--font-structural);font-size:0.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.04em;padding:0.2rem 0.5rem;border-radius:4px;
+}
+.ot-status.pending{background:rgba(93,183,222,0.12);color:var(--sky-surge)}
+.ot-status.picked{background:rgba(26,14,18,0.06);color:rgba(26,14,18,0.5)}
+.owner-empty{text-align:center;padding:3rem;color:rgba(26,14,18,0.3);font-size:0.95rem}
+.owner-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.owner-warning{
+  margin-top:2rem;padding:1rem;border-radius:var(--radius);
+  background:rgba(186,39,74,0.06);border:1px solid rgba(186,39,74,0.15);
+  font-size:0.85rem;color:rgba(26,14,18,0.6);
+}
+.owner-warning i{color:var(--rosewood);margin-right:0.4rem}
+
+/* ===== NOTIFICATION MODAL ===== */
+.notify-modal{
+  position:fixed;inset:0;z-index:9500;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(26,14,18,0.5);padding:1rem;
+}
+.notify-modal.open{display:flex}
+.notify-box{
+  background:var(--cream);border-radius:var(--radius-lg);
+  padding:2rem;max-width:400px;width:100%;box-shadow:var(--shadow-lg);
+  text-align:center;
+}
+.notify-box h3{margin-bottom:0.5rem}
+.notify-box p{font-size:0.9rem;color:rgba(26,14,18,0.6);margin-bottom:1.25rem}
+.notify-box .form-input{margin-bottom:1rem}
+.notify-box .notify-actions{display:flex;gap:0.75rem;justify-content:center}
+.notify-box .btn-sm{flex:1}
+
+/* ===== CONSULTATION FLOAT ===== */
+.consult-float{
+  position:fixed;bottom:1.25rem;right:1.25rem;z-index:8000;
+  display:flex;flex-direction:column;align-items:flex-end;gap:0.5rem;
+}
+.consult-btn{
+  width:56px;height:56px;border-radius:50%;
+  background:var(--sky-surge);color:#fff;font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-lg);cursor:pointer;
+  transition:all var(--transition);border:none;
+}
+.consult-btn:hover{transform:scale(1.08);background:#4aa6ce}
+.consult-label{
+  font-family:var(--font-structural);font-size:0.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.06em;
+  background:var(--ink);color:#fff;padding:0.3rem 0.7rem;border-radius:4px;
+  opacity:0;transform:translateX(8px);transition:all var(--transition);
+  pointer-events:none;white-space:nowrap;
+}
+.consult-float:hover .consult-label{opacity:1;transform:translateX(0)}
+
+/* ===== FOOTER ===== */
+#footer{
+  background:var(--ink);color:rgba(255,255,255,0.6);padding:3rem 1.25rem 1.5rem;
+}
+.footer-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;
+  max-width:1200px;margin:0 auto;margin-bottom:2rem;
+}
+.footer-col h4{
+  font-family:var(--font-structural);font-size:0.82rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.9);margin-bottom:1rem;
+}
+.footer-col a{
+  display:block;font-size:0.9rem;padding:0.25rem 0;
+  transition:color var(--transition);
+}
+.footer-col a:hover{color:var(--sky-surge)}
+.footer-bottom{
+  max-width:1200px;margin:0 auto;
+  padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;
+  font-size:0.82rem;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.anim-in{
+  opacity:0;transform:translateY(24px);
+  transition:opacity 0.55s ease,transform 0.55s ease;
+}
+.anim-in.visible{opacity:1;transform:translateY(0)}
+.anim-in:nth-child(2){transition-delay:0.08s}
+.anim-in:nth-child(3){transition-delay:0.16s}
+.anim-in:nth-child(4){transition-delay:0.24s}
+@media(prefers-reduced-motion:reduce){
+  .anim-in{opacity:1;transform:none;transition:none}
+}
+
+/* ===== TOAST ===== */
+.toast{
+  position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--ink);color:#fff;padding:0.75rem 1.5rem;border-radius:var(--radius);
+  font-family:var(--font-structural);font-size:0.85rem;font-weight:500;
+  z-index:9999;opacity:0;transition:all 0.3s ease;pointer-events:none;
+  box-shadow:var(--shadow-lg);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ===== BUILDER PAGE & CART FLOAT ===== */
+.builder-shade-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(130px, 1fr)); gap:0.75rem; margin-bottom:2rem; }
+.builder-shade-card { border:1px solid rgba(26,14,18,0.1); border-radius:var(--radius); padding:0.75rem; text-align:center; background:var(--cream); cursor:pointer; transition:all var(--transition); }
+.builder-shade-card:hover { border-color:var(--sky-surge); transform:translateY(-3px); box-shadow:var(--shadow-md); }
+.builder-shade-color { width:100%; height:60px; border-radius:6px; margin-bottom:0.5rem; border:1px solid rgba(26,14,18,0.05); }
+.builder-shade-card h4 { font-size:0.85rem; margin-bottom:0.15rem; line-height:1.2; color:var(--ink); }
+.builder-shade-card p { font-family:var(--font-structural); font-size:0.75rem; color:rgba(26,14,18,0.5); margin:0; }
+
+.cart-float {
+  position:fixed; bottom:5.5rem; right:1.25rem; z-index:8500;
+  background:var(--ink); color:#fff; padding:0.75rem 1.5rem;
+  border-radius:30px; display:flex; align-items:center; gap:0.6rem;
+  box-shadow:var(--shadow-lg); cursor:pointer; transition:all var(--transition);
+  font-family:var(--font-structural); font-weight:600; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.04em;
+}
+.cart-float:hover { transform:translateY(-3px); background:var(--rosewood); }
+.cart-badge {
+  background:var(--sky-surge); color:#fff; width:24px; height:24px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; font-weight:700; margin-right:0.25rem;
+}
+@media(max-width:767px) { .cart-float { bottom:4.5rem; right:1rem; } }
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:767px){
+  .section{padding:3rem 1rem}
+  .section-lg{padding:3.5rem 1rem}
+  .home-hero{padding:clamp(2.5rem,10vw,4rem) 1rem}
+  .calc-teaser{flex-direction:column;text-align:center}
+  .offers-banner-home{flex-direction:column;text-align:center}
+  .booking-progress{overflow-x:auto;padding-bottom:0.5rem}
+  .bp-step{font-size:0.7rem}
+  .owner-table{font-size:0.8rem}
+  .owner-table th,.owner-table td{padding:0.5rem 0.25rem}
+  .consult-float{bottom:1rem;right:1rem}
+  .consult-btn{width:50px;height:50px;font-size:1.2rem}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:400px){
+  .footer-grid{grid-template-columns:1fr}
+  .date-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+<!-- ===== UNCUT OPENING SEQUENCE ===== -->
+<div id="uncut-overlay" style="position: fixed; inset: 0; z-index: 10000; overflow: hidden; background: var(--cream); display: flex; align-items: center; justify-content: center;">
+  
+  <!-- LAYER 1: THE SHUTTER (ROSEWOOD, TEXTURED, SPLIT) -->
+  <div id="shutter-top" class="shutter-panel" style="position: absolute; top: 0; left: 0; width: 100%; height: 50%; z-index: 20;"></div>
+  <div id="shutter-bottom" class="shutter-panel" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; z-index: 20;"></div>
+
+  <!-- LAYER 2: THE PULSE RINGS -->
+  <div id="pulse-container" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 30; pointer-events: none;">
+      <div id="p-ring-1" style="position: absolute; width: 0px; height: 0px; border: 2px solid var(--sky-surge); border-radius: 50%; opacity: 0;"></div>
+      <div id="p-ring-2" style="position: absolute; width: 0px; height: 0px; border: 2px solid var(--sky-surge); border-radius: 50%; opacity: 0;"></div>
+      <div id="p-ring-3" style="position: absolute; width: 0px; height: 0px; background: transparent; border: 2px solid var(--sky-surge); border-radius: 50%; opacity: 0;"></div>
+      <div id="p-dot" style="position: absolute; width: 12px; height: 12px; background: var(--sky-surge); border-radius: 50%; opacity: 0;"></div>
+  </div>
+
+  <!-- LAYER 3: THE WORDMARK REVEAL -->
+  <div id="reveal-wordmark" style="position: absolute; z-index: 15; display: flex; flex-direction: column; align-items: center; opacity: 0;">
+      <h1 style="font-family: var(--font-display); font-size: clamp(2rem, 6vw, 4rem); color: var(--ink); margin: 0; text-transform: uppercase; letter-spacing: 0.05em;">SMF TRADER</h1>
+      <div id="wordmark-line" style="width: 100%; height: 3px; background: var(--sky-surge); margin-top: 8px;"></div>
+  </div>
+
+  <!-- LAYER 4: CONTROLS -->
+  <button id="skip-btn" style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 50; color: var(--ink); background: var(--cream); border: 2px solid var(--ink); padding: 0.75rem 1.5rem; border-radius: 30px; font-family: var(--font-structural); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; font-size: 0.9rem; cursor: pointer; box-shadow: 4px 4px 0px var(--ink); pointer-events: auto; transition: transform 0.1s; display: block;">Skip Intro ↗</button>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="header-inner">
+    <a href="#/" class="logo-text" aria-label="Home">SMF <span>Trader</span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#/catalog">Catalog</a>
+      <a href="#/builder" style="color:var(--sky-surge); font-weight:700;">Quick Order</a>
+      <a href="#/calculator">Calculator</a>
+      <a href="#/offers">Offers</a>
+      <a href="#/store">Store</a>
+      <a href="#/contact">Contact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#/book" class="btn btn-action btn-sm">Book a Pickup</a>
+    </div>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <a href="#/">Home</a>
+  <a href="#/catalog">Catalog</a>
+  <a href="#/builder" style="color:var(--sky-surge); font-weight:700;">Quick Order</a>
+  <a href="#/calculator">Calculator</a>
+  <a href="#/offers">Offers</a>
+  <a href="#/trade">For Painters</a>
+  <a href="#/store">Store &amp; Hours</a>
+  <a href="#/about">About</a>
+  <a href="#/reviews">Reviews</a>
+  <a href="#/contact">Contact &amp; FAQ</a>
+  <div class="mob-cta">
+    <a href="#/book" class="btn btn-action" style="width:100%;justify-content:center">Book a Pickup</a>
+  </div>
+</nav>
+
+<!-- ===== PAGE: HOME ===== -->
+<main id="page-home" class="page-view active">
+    <section class="home-hero">
+    <div class="container" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem;">
+      
+      <!-- Left Side: Warm Welcome Text -->
+      <div style="flex: 1 1 400px; z-index: 2;">
+        <p class="eyebrow" style="color:rgba(255,255,255,0.6)">Authorized Birla Opus Dealer</p>
+        <h1>Welcome! Your Walls Deserve Better</h1>
+        <p class="hero-sub">We're so glad you're here. Browse our shades, calculate exactly what you need, and book a pickup — all before you leave the house. No guesswork, just perfect colors.</p>
+        <div class="hero-actions">
+          <a href="#/book" class="btn btn-action">Book a Pickup</a>
+          <a href="#/catalog" class="btn btn-white">Browse Shades</a>
+        </div>
+      </div>
+
+      <!-- Right Side: The Photo -->
+      <div style="flex: 1 1 300px; display: flex; justify-content: center; align-items: center; position: relative; z-index: 2;">
+        <style>
+          @keyframes gentle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+          }
+          .floating-character {
+            animation: gentle-float 4s ease-in-out infinite;
+            max-height: 450px; 
+            width: auto; 
+            object-fit: contain; 
+            filter: drop-shadow(0px 15px 25px rgba(0,0,0,0.3));
+          }
+        </style>
+        
+        <img src="1.png" alt="Welcome to SMF Trader" class="floating-character">
+      </div>
+
+    </div>
+  </section>
+  <div class="dealer-strip">
+    <div class="container">
+      <div class="dealer-badge"><i class="fa-solid fa-certificate"></i> Authorized Birla Opus Dealer</div>
+      <div class="dealer-badge"><i class="fa-solid fa-palette"></i> 500+ Shades In-Store</div>
+      <div class="dealer-badge"><i class="fa-solid fa-truck-fast"></i> Ready-to-Pickup in 30 Min</div>
+    </div>
+  </div>
+
+  <section class="section value-props">
+    <div class="container">
+      <div class="grid-3">
+        <div class="prop anim-in">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h3>Book Online, Pickup In-Store</h3>
+          <p>Select your shade and pack size. We'll have it mixed and ready when you walk in.</p>
+        </div>
+        <div class="prop anim-in">
+          <i class="fa-solid fa-calculator"></i>
+          <h3>Know Your Quantity</h3>
+          <p>Our calculator tells you exactly how many litres you need — no overbuying, no running short.</p>
+        </div>
+        <div class="prop anim-in">
+          <i class="fa-solid fa-hand-holding-heart"></i>
+          <h3>Real Help, Not Just Products</h3>
+          <p>Free colour consultation over WhatsApp. We help you pick the right finish for your space.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow anim-in">Paint Categories</p>
+      <h2 class="anim-in" style="margin-bottom:2rem">Find the Right Finish</h2>
+      <div class="grid-4">
+        <div class="cat-card anim-in" onclick="navigateTo('/catalog?tab=interior')">
+          <div class="cat-icon" style="background:rgba(186,39,74,0.08);color:var(--rosewood)"><i class="fa-solid fa-couch"></i></div>
+          <h3>Interior Paint</h3>
+          <p>Matte, silk, washable — for every room</p>
+          <span class="cat-link">Browse <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></span>
+        </div>
+        <div class="cat-card anim-in" onclick="navigateTo('/catalog?tab=exterior')">
+          <div class="cat-icon" style="background:rgba(93,183,222,0.1);color:var(--sky-surge)"><i class="fa-solid fa-sun"></i></div>
+          <h3>Exterior Paint</h3>
+          <p>Weather-proof, UV-resistant, long-lasting</p>
+          <span class="cat-link">Browse <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></span>
+        </div>
+        <div class="cat-card anim-in" onclick="navigateTo('/catalog?tab=wood-metal')">
+          <div class="cat-icon" style="background:rgba(26,14,18,0.06);color:var(--ink)"><i class="fa-solid fa-door-open"></i></div>
+          <h3>Wood &amp; Metal</h3>
+          <p>Primers, enamels, PU finishes</p>
+          <span class="cat-link">Browse <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></span>
+        </div>
+        <div class="cat-card anim-in" onclick="navigateTo('/catalog?tab=waterproofing')">
+          <div class="cat-icon" style="background:rgba(45,90,61,0.08);color:#2D5A3D"><i class="fa-solid fa-droplet-slash"></i></div>
+          <h3>Waterproofing</h3>
+          <p>Damp-proofing, crack fill, coating</p>
+          <span class="cat-link">Browse <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="calc-teaser anim-in">
+        <div class="calc-visual"><i class="fa-solid fa-ruler-combined"></i></div>
+        <div class="calc-text">
+          <h3>Not Sure How Much Paint You Need?</h3>
+          <p>Our free quantity calculator does the math for you. Enter your room size, get an exact litre recommendation.</p>
+        </div>
+        <a href="#/calculator" class="btn btn-action">Use Calculator</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section essentials-strip" style="padding-top:2.5rem;padding-bottom:2.5rem">
+    <div class="container">
+      <p class="essentials-label">Also Available In-Store</p>
+      <div class="essentials-grid">
+        <div class="essentials-item"><i class="fa-solid fa-paintbrush"></i><span>Brushes</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-roller"></i><span>Rollers</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-tape"></i><span>Masking Tape</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-fill-drip"></i><span>Primer</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-broom"></i><span>Drop Sheets</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-screwdriver-wrench"></i><span>Sandpaper</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-jar"></i><span>Putty</span></div>
+        <div class="essentials-item"><i class="fa-solid fa-plug"></i><span>Sealants</span></div>
+      </div>
+      <p style="margin-top:1rem;font-size:0.85rem;color:rgba(26,14,18,0.4)">
+        <a href="#/catalog?tab=essentials" style="color:var(--sky-surge);font-family:var(--font-structural);font-weight:500;font-size:0.82rem;text-transform:uppercase;letter-spacing:0.04em">View all essentials <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:1rem">
+    <div class="container">
+      <div class="offers-banner-home anim-in">
+        <div>
+          <p class="eyebrow" style="color:var(--cream);opacity:0.7">Limited Time</p>
+          <h3>Move-In Season Offer</h3>
+          <p>Flat 15% off on all interior emulsions. Valid on bookings made before month end.</p>
+        </div>
+        <a href="#/offers" class="btn btn-white">See All Offers</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="eyebrow anim-in">What Customers Say</p>
+      <div class="testimonial-strip anim-in">
+        <div class="testimonial-card">
+          <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <blockquote>"Booked my shade online and it was ready when I reached the shop. Saved me a full trip of waiting around. The colour matched perfectly."</blockquote>
+          <cite>Ritika S., Salt Lake</cite>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:1rem">
+        <a href="#/reviews" style="color:var(--sky-surge);font-family:var(--font-structural);font-size:0.85rem;font-weight:500;text-transform:uppercase;letter-spacing:0.04em">Read More Reviews <i class="fa-solid fa-arrow-right" style="font-size:0.7rem"></i></a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0">
+    <div class="container">
+      <div class="anim-in" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+        <div>
+          <p class="eyebrow">Our Story</p>
+          <h3 style="font-size:1.3rem">Trusted by Kolkata Homeowners Since 2012</h3>
+          <p style="color:rgba(26,14,18,0.6);margin-top:0.25rem;max-width:450px;font-size:0.92rem">A family-run paint shop that grew into an authorized Birla Opus dealership — because we care about walls, not just sales.</p>
+        </div>
+        <a href="#/about" class="btn btn-outline btn-sm">About Us</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== PAGE: CATALOG ===== -->
+<main id="page-catalog" class="page-view">
+  <div style="padding-top:1rem">
+    <div class="container" style="padding:1.25rem 1.25rem 0">
+      <p class="eyebrow">Browse</p>
+      <h1 style="margin-bottom:0.5rem">Paint Catalog</h1>
+    </div>
+    <div class="catalog-tabs" id="catalog-tabs" role="tablist"></div>
+    <div class="catalog-filters" id="catalog-filters"></div>
+    <div class="catalog-grid" id="catalog-grid"></div>
+  </div>
+</main>
+
+<!-- ===== PAGE: PRODUCT DETAIL ===== -->
+<main id="page-product" class="page-view">
+  <div class="product-detail" id="product-detail-content"></div>
+</main>
+<!-- ===== PAGE: CUSTOM ORDER BUILDER ===== -->
+<main id="page-builder" class="page-view">
+  <div style="padding:2rem 1.25rem; max-width:1200px; margin:0 auto;">
+    <p class="eyebrow">Fast Checkout</p>
+    <h1 style="margin-bottom:0.5rem">Custom Order Builder</h1>
+    <p style="color:rgba(26,14,18,0.6); margin-bottom:2rem; max-width:600px;">Select a category below. Tap any shade or tool to instantly add it to your cart. Build your whole order without leaving this page.</p>
+
+    <div class="catalog-tabs" id="builder-tabs" style="margin-bottom:2rem; padding:0; border-bottom:2px solid rgba(26,14,18,0.06);"></div>
+    <div id="builder-content"></div>
+  </div>
+</main>
+
+<!-- ===== ORDER CART FLOAT ===== -->
+<div class="cart-float" id="cart-float" onclick="navigateTo('/book')" style="display:none;">
+  <div class="cart-badge" id="cart-badge">0</div>
+  <i class="fa-solid fa-bag-shopping"></i>
+  <span class="cart-text">Checkout</span>
+</div>
+
+<!-- ===== SIZE SELECTOR MODAL ===== -->
+<div class="notify-modal" id="size-modal">
+  <div class="notify-box" style="max-width:350px;">
+    <h3 style="margin-bottom:1rem">Select Pack Size</h3>
+    <div id="size-modal-content"></div>
+    <button class="btn btn-outline btn-sm" onclick="document.getElementById('size-modal').classList.remove('open')" style="width:100%; margin-top:1rem;">Cancel</button>
+  </div>
+</div>
+<!-- ===== PAGE: CALCULATOR ===== -->
+<main id="page-calculator" class="page-view">
+  <div class="calc-page">
+    <p class="eyebrow">Free Tool</p>
+    <h1>Paint Quantity Calculator</h1>
+    <p class="calc-intro">Enter your room dimensions and we'll tell you exactly how many litres you need. No more guessing.</p>
+    <div class="calc-form-card anim-in">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Room Length (ft)</label>
+          <input type="number" class="form-input" id="calc-length" placeholder="12" min="1" max="200">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Room Width (ft)</label>
+          <input type="number" class="form-input" id="calc-width" placeholder="10" min="1" max="200">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Wall Height (ft)</label>
+          <input type="number" class="form-input" id="calc-height" placeholder="10" min="1" max="50" value="10">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of Coats</label>
+          <select class="form-input" id="calc-coats">
+            <option value="1">1 Coat</option>
+            <option value="2" selected>2 Coats</option>
+            <option value="3">3 Coats</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Surface Type</label>
+        <select class="form-input" id="calc-surface">
+          <option value="smooth">Smooth Plastered Wall</option>
+          <option value="medium">Medium Texture</option>
+          <option value="rough">Rough / Uneven Surface</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">Doors &amp; Windows (subtract area)</label>
+        <input type="number" class="form-input" id="calc-openings" placeholder="0" min="0" value="0">
+        <span style="font-size:0.78rem;color:rgba(26,14,18,0.4);margin-top:0.2rem;display:block">Total sq ft of doors and windows to exclude</span>
+      </div>
+    </div>
+    <div class="calc-output anim-in" id="calc-output" style="display:none">
+      <p style="font-family:var(--font-structural);font-size:0.82rem;text-transform:uppercase;letter-spacing:0.08em;opacity:0.5;margin-bottom:0.5rem">Recommended Quantity</p>
+      <div class="calc-liters" id="calc-liters">0 <span>litres</span></div>
+      <div class="calc-packs" id="calc-packs"></div>
+      <div class="calc-actions">
+        <button class="btn btn-action" onclick="bookFromCalc()">Book This Quantity</button>
+        <button class="btn btn-outline btn-sm" onclick="resetCalc()">Recalculate</button>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem">
+      <button class="btn btn-action" onclick="runCalc()" id="calc-run-btn">Calculate Now</button>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: BOOK PICKUP ===== -->
+<main id="page-book" class="page-view">
+  <div class="booking-page">
+    <p class="eyebrow">Reserve Your Paint</p>
+    <h1>Book a Pickup</h1>
+    <p class="booking-intro">Tell us what you need and when. We'll have it mixed and waiting.</p>
+
+    <div class="booking-progress" id="booking-progress">
+      <div class="bp-step active" data-step="0"><span class="bp-num">1</span> Items</div>
+      <div class="bp-line"></div>
+      <div class="bp-step" data-step="1"><span class="bp-num">2</span> Date &amp; Time</div>
+      <div class="bp-line"></div>
+      <div class="bp-step" data-step="2"><span class="bp-num">3</span> Your Details</div>
+      <div class="bp-line"></div>
+      <div class="bp-step" data-step="3"><span class="bp-num">4</span> Confirm</div>
+    </div>
+
+    <div class="booking-steps">
+      <div class="booking-track" id="booking-track">
+        <!-- Step 0: Items -->
+        <div class="booking-step" id="book-step-0">
+          <div id="book-items-list"></div>
+          <button class="add-item-link" onclick="openAddItemModal()">
+            <i class="fa-solid fa-plus"></i> Add another item
+          </button>
+          <div class="booking-nav">
+            <div></div>
+            <button class="btn btn-action" onclick="bookingNext()">Choose Date &amp; Time <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <!-- Step 1: Date & Time -->
+        <div class="booking-step" id="book-step-1">
+          <h3 style="margin-bottom:0.5rem">Pick a Date</h3>
+          <div class="date-grid" id="date-grid"></div>
+          <h3 style="margin-bottom:0.5rem">Pick a Time Slot</h3>
+          <div class="time-grid" id="time-grid"></div>
+          <div class="booking-nav">
+            <button class="btn-back" onclick="bookingPrev()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="btn btn-action" onclick="bookingNext()">Your Details <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <!-- Step 2: Contact -->
+        <div class="booking-step" id="book-step-2">
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" id="book-name" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" id="book-phone" placeholder="10-digit mobile number">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Notes (optional)</label>
+            <textarea class="form-input" id="book-notes" rows="3" placeholder="Any special instructions..."></textarea>
+          </div>
+          <label class="whatsapp-check">
+            <input type="checkbox" id="book-optin" checked>
+            Send me shade launches &amp; offers via WhatsApp
+          </label>
+          <div class="booking-nav">
+            <button class="btn-back" onclick="bookingPrev()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="btn btn-action" onclick="bookingNext()">Review Booking <i class="fa-solid fa-arrow-right"></i></button>
+          </div>
+        </div>
+        <!-- Step 3: Confirm -->
+        <div class="booking-step" id="book-step-3">
+          <div class="review-card" id="review-card-content"></div>
+          <div class="booking-nav">
+            <button class="btn-back" onclick="bookingPrev()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+            <button class="btn btn-action" onclick="submitBooking()"><i class="fa-brands fa-whatsapp"></i> Confirm via WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: BOOKING CONFIRMED ===== -->
+<main id="page-confirmed" class="page-view">
+  <div class="confirm-page" id="confirm-content"></div>
+</main>
+
+<!-- ===== PAGE: TRADE ===== -->
+<main id="page-trade" class="page-view">
+  <section class="trade-hero">
+    <div class="container">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.5)">For Professionals</p>
+      <h1>Bulk Pricing. Reliable Stock. Zero Delays.</h1>
+      <p>If you're a painter, contractor, or interior firm — we keep the shades you need, in the quantities you need, ready when you need them. No more running between shops mid-project.</p>
+    </div>
+  </section>
+  <section class="trade-benefits">
+    <div class="container">
+      <div class="benefit anim-in">
+        <i class="fa-solid fa-tags"></i>
+        <div><h3>Trade Pricing</h3><p>Significant per-litre discounts on bulk orders. The more you paint, the more you save.</p></div>
+      </div>
+      <div class="benefit anim-in">
+        <i class="fa-solid fa-warehouse"></i>
+        <div><h3>Stock Priority</h3><p>Trade accounts get priority during stock shortages. Your project doesn't wait for anyone.</p></div>
+      </div>
+      <div class="benefit anim-in">
+        <i class="fa-solid fa-clipboard-list"></i>
+        <div><h3>Credit Terms</h3><p>Flexible payment cycles for established trade customers. We understand project cash flows.</p></div>
+      </div>
+      <div class="benefit anim-in">
+        <i class="fa-solid fa-headset"></i>
+        <div><h3>Dedicated Support</h3><p>One point of contact for all your orders. No explaining your project to a new person each time.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="trade-cta">
+    <h2>Get Trade Pricing</h2>
+    <p>Drop us a message on WhatsApp with your name and the type of work you do. We'll set you up within a day.</p>
+    <a href="https://wa.me/919876543210?text=Hi%20ColorVault!%20I'm%20a%20painter%2Fcontractor%20and%20I'd%20like%20to%20inquire%20about%20trade%20pricing." class="btn btn-white" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Message on WhatsApp</a>
+  </section>
+</main>
+
+<!-- ===== PAGE: STORE ===== -->
+<main id="page-store" class="page-view">
+  <div class="store-page">
+    <p class="eyebrow">Visit Us</p>
+    <h1>Store &amp; Hours</h1>
+    <div class="map-container">
+      <!-- PLACEHOLDER: Replace with real Google Maps embed -->
+      <div class="map-placeholder">
+        <i class="fa-solid fa-map-location-dot"></i>
+        <p>Google Maps embed placeholder</p>
+        <p style="font-size:0.8rem;margin-top:0.5rem">Replace with iframe from Google Maps</p>
+      </div>
+    </div>
+    <h3 style="margin-bottom:1rem">Opening Hours</h3>
+    <div class="hours-table">
+      <div class="hours-row"><span class="day">Monday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Tuesday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Wednesday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Thursday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Friday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Saturday</span><span class="time">9:00 AM – 8:00 PM</span></div>
+      <div class="hours-row"><span class="day">Sunday</span><span class="time">10:00 AM – 4:00 PM</span></div>
+    </div>
+    <h3 style="margin-bottom:1rem">Get in Touch</h3>
+    <p style="margin-bottom:0.5rem;color:rgba(26,14,18,0.7)"><strong>Address:</strong> 42 Park Street, Kolkata 700016</p>
+    <p style="margin-bottom:1.5rem;color:rgba(26,14,18,0.7)"><strong>Phone:</strong> +91 98765 43210</p>
+    <div class="store-contacts">
+      <a href="https://wa.me/919876543210" target="_blank" rel="noopener" class="btn btn-action btn-sm"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="tel:+919876543210" class="btn btn-outline btn-sm"><i class="fa-solid fa-phone"></i> Call</a>
+      <a href="https://maps.google.com/?q=42+Park+Street+Kolkata" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fa-solid fa-diamond-turn-right"></i> Directions</a>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: ABOUT ===== -->
+<main id="page-about" class="page-view">
+  <section class="about-hero">
+    <div class="container">
+      <p class="eyebrow" style="color:rgba(255,255,255,0.5)">Since 2012</p>
+      <h1>A Paint Shop That Cares About Your Walls</h1>
+      <p>ColorVault started as a small hardware corner on Park Street. Twelve years later, we're Kolkata's trusted Birla Opus dealer — but we still treat every customer like a neighbor.</p>
+    </div>
+  </section>
+  <div class="about-trust">
+    <div class="trust-item anim-in"><div class="trust-num">12+</div><div class="trust-label">Years in Business</div></div>
+    <div class="trust-item anim-in"><div class="trust-num">500+</div><div class="trust-label">Shades Available</div></div>
+    <div class="trust-item anim-in"><div class="trust-num">8K+</div><div class="trust-label">Happy Customers</div></div>
+    <div class="trust-item anim-in"><div class="trust-num">4.8</div><div class="trust-label">Google Rating</div></div>
+  </div>
+  <section class="about-content">
+    <div class="about-block anim-in">
+      <h2>How We Got Here</h2>
+      <p>We started with a simple idea: a paint shop where the staff actually knows paint. Not just brand names and prices — but which finish works on a damp wall, how many coats a dark shade really needs, and why primer isn't optional. That knowledge built our reputation, one living room at a time.</p>
+    </div>
+    <div class="about-block anim-in">
+      <h2>Why Birla Opus</h2>
+      <p>We chose to partner with Birla Opus because their product range covers every real-world scenario our customers face — from luxury interior finishes to brutal exterior weatherproofing. We've tested their lines extensively and stand behind every tin we sell.</p>
+    </div>
+    <div class="about-block anim-in">
+      <h2>A Note From the Owner</h2>
+      <p>"Every wall has a story. We just help you pick the right colour to tell it. Walk in, pick a shade, or just ask us — we love this stuff." — <strong>PLACEHOLDER: Owner Name</strong></p>
+    </div>
+  </section>
+</main>
+
+<!-- ===== PAGE: REVIEWS ===== -->
+<main id="page-reviews" class="page-view">
+  <div class="reviews-page">
+    <p class="eyebrow">Social Proof</p>
+    <h1>Customer Reviews</h1>
+    <div class="reviews-summary anim-in">
+      <div class="avg-rating">4.8</div>
+      <div class="rating-details">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+        <div class="total">Based on 127 reviews on Google</div>
+      </div>
+    </div>
+    <div class="anim-in">
+      <div class="review-card-full">
+        <div class="rc-top"><span class="rc-name">Ritika Sharma</span><span class="rc-date">December 2024</span></div>
+        <div class="rc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="rc-text">Booked my shade online and it was ready when I reached the shop. Saved me a full trip of waiting around. The colour matched perfectly — exactly what I saw on the shade card.</p>
+      </div>
+      <div class="review-card-full">
+        <div class="rc-top"><span class="rc-name">Amit Das</span><span class="rc-date">November 2024</span></div>
+        <div class="rc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="rc-text">I'm a contractor and I've been buying from ColorVault for 3 years now. They never run out of stock on the shades I need, and the trade pricing is genuinely better than the other shops in the area.</p>
+      </div>
+      <div class="review-card-full">
+        <div class="rc-top"><span class="rc-name">Priya Mukherjee</span><span class="rc-date">October 2024</span></div>
+        <div class="rc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+        <p class="rc-text">The calculator on their website saved me from buying an extra 4 litres. Staff helped me pick between two similar shades and explained the difference in finish. Good experience overall.</p>
+      </div>
+      <div class="review-card-full">
+        <div class="rc-top"><span class="rc-name">Suresh Patel</span><span class="rc-date">October 2024</span></div>
+        <div class="rc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="rc-text">Used their waterproofing solution for my ground-floor flat. It's been two monsoons and not a single damp patch. The owner personally came to check the walls before recommending the product.</p>
+      </div>
+      <div class="review-card-full">
+        <div class="rc-top"><span class="rc-name">Nandini Roy</span><span class="rc-date">September 2024</span></div>
+        <div class="rc-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="rc-text">The WhatsApp booking system is so convenient. I sent my shade code at 10 AM, picked it up at 11:30, and was painting by noon. This is how every paint shop should work.</p>
+      </div>
+    </div>
+    <div class="reviews-cta anim-in">
+      <a href="https://www.google.com/maps/place/PLACEHOLDER" target="_blank" rel="noopener" class="btn btn-outline"><i class="fa-brands fa-google"></i> Leave Us a Review on Google</a>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: OFFERS ===== -->
+<main id="page-offers" class="page-view">
+  <div class="offers-page">
+    <p class="eyebrow">Save More</p>
+    <h1>Current Offers</h1>
+    <p class="offers-intro">All offers are valid for in-store pickup bookings. Mention the offer when you arrive.</p>
+    <div class="anim-in">
+      <div class="offer-card">
+        <span class="offer-tag">Active</span>
+        <h3>Move-In Season: 15% Off Interior Emulsions</h3>
+        <p>Flat 15% off on all Birla Opus interior paints — Velvet Touch, Silk Appeal, and Easy Clean. Covers all pack sizes.</p>
+        <span class="offer-validity">Valid through 31 January 2025</span>
+      </div>
+      <div class="offer-card">
+        <span class="offer-tag">Active</span>
+        <h3>Full Home Package: Free Primer with 20L Orders</h3>
+        <p>Buy any 20-litre interior or exterior pack and get 4 litres of compatible primer free. One per customer.</p>
+        <span class="offer-validity">Valid through 15 February 2025</span>
+      </div>
+      <div class="offer-card">
+        <span class="offer-tag">Active</span>
+        <h3>Waterproofing Combo: Damp Stop + Crack Fill at 20% Off</h3>
+        <p>Pre-monsoon special. Buy Birla Opus Damp Stop and Crack Fill together and save 20% on the combo.</p>
+        <span class="offer-validity">Valid through 30 March 2025</span>
+      </div>
+      <div class="offer-card">
+        <span class="offer-tag">Coming Soon</span>
+        <h3>Diwali Refresh: Buy 2 Get 1 on Wood &amp; Metal Finishes</h3>
+        <p>Get your doors and windows looking festival-ready. Buy any 2 wood or metal finish packs, get a third free.</p>
+        <span class="offer-validity">Starting October 2025</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<main id="page-contact" class="page-view">
+  <div class="contact-page">
+    <p class="eyebrow">Get Answers</p>
+    <h1>Contact &amp; FAQ</h1>
+    <p class="contact-intro">Most questions are answered below. For anything else, WhatsApp us — it's the fastest way to reach us.</p>
+    <div class="anim-in">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do you deliver paint?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>No — we don't deliver. Paint needs to be mixed precisely for your shade, and we want to make sure you get exactly what you ordered. Booking online lets us prepare your order so it's ready the moment you walk in. No waiting, no mix-ups.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I get a custom shade mixed?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>Absolutely. We have a computerized tinting machine that can match any shade from the Birla Opus palette — over 500 options. Bring in a reference (a swatch, a photo, a piece of fabric) and we'll find the closest match or custom-blend it.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">What if I miss my pickup slot?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>No problem — just WhatsApp us to reschedule. Your mixed paint will be kept for up to 48 hours. After that, we may need to re-verify the shade before handing it over, to ensure quality.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do you sell tools and hardware too?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>Yes — brushes, rollers, trays, masking tape, drop sheets, sandpaper, primer, putty, sealants, and basic plumbing/electrical supplies. It's not our main focus, but we keep the essentials in stock so you can grab everything in one trip.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Can I return paint if the shade is wrong?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>Custom-mixed paint cannot be returned since it's made to order. This is why we encourage you to use our shade cards, ask for a test pot, or consult with us before confirming. For unopened, non-mixed stock, we offer exchange within 7 days.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How accurate is the online quantity calculator?<i class="fa-solid fa-chevron-down"></i></button>
+        <div class="faq-a"><p>It gives a reliable estimate based on standard coverage rates for Birla Opus paints. Actual usage can vary depending on wall condition, application method, and how many coats you apply. We recommend rounding up by 10-15% to be safe, and our staff can fine-tune the estimate when you visit.</p></div>
+      </div>
+    </div>
+    <div class="contact-whatsapp anim-in">
+      <h3>Still Have Questions?</h3>
+      <p>WhatsApp us directly. We reply within 30 minutes during shop hours.</p>
+      <a href="https://wa.me/919876543210?text=Hi%20ColorVault!%20I%20have%20a%20question." target="_blank" rel="noopener" class="btn btn-action"><i class="fa-brands fa-whatsapp"></i> Message on WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<!-- ===== PAGE: OWNER DASHBOARD ===== -->
+<main id="page-owner" class="page-view">
+  <div class="owner-page">
+    <p class="eyebrow">Private Dashboard</p>
+    <h1>Booking Management</h1>
+    <p class="owner-sub">View and manage pickup bookings. Data is stored in your browser's local storage.</p>
+    <div class="owner-stats" id="owner-stats"></div>
+    <div class="owner-bookings">
+      <h2>All Bookings</h2>
+      <div id="owner-bookings-list"></div>
+    </div>
+    <div class="owner-actions">
+      <button class="btn btn-outline btn-sm" onclick="exportBookings()"><i class="fa-solid fa-download"></i> Export as Text</button>
+      <button class="btn btn-rosewood btn-sm" onclick="clearAllBookings()"><i class="fa-solid fa-trash"></i> Clear All</button>
+    </div>
+    <div class="owner-warning">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      This dashboard uses browser local storage. Data is visible to anyone with this URL. It is not encrypted or server-secured. For production use, connect to a proper backend.
+    </div>
+  </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>ColorVault Paints</h4>
+      <p style="font-size:0.88rem;line-height:1.6;margin-bottom:0.75rem">Authorized Birla Opus dealer in Kolkata. Paint, tools, and honest advice since 2012.</p>
+      <div style="display:flex;gap:0.75rem">
+        <a href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" style="font-size:1.2rem"></i></a>
+        <a href="https://www.google.com/maps/place/PLACEHOLDER" target="_blank" rel="noopener" aria-label="Google Maps"><i class="fa-brands fa-google" style="font-size:1.2rem"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#/catalog">Paint Catalog</a>
+      <a href="#/calculator">Quantity Calculator</a>
+      <a href="#/book">Book a Pickup</a>
+      <a href="#/offers">Current Offers</a>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <a href="#/store">Store &amp; Hours</a>
+      <a href="#/about">About Us</a>
+      <a href="#/reviews">Reviews</a>
+      <a href="#/contact">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p style="font-size:0.88rem;margin-bottom:0.4rem">42 Park Street, Kolkata 700016</p>
+      <p style="font-size:0.88rem;margin-bottom:0.75rem">+91 98765 43210</p>
+      <a href="https://wa.me/919876543210" target="_blank" rel="noopener" style="color:var(--sky-surge)"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>2025 ColorVault Paints. All rights reserved.</span>
+    <span>Not affiliated with Birla Opus beyond authorized dealership.</span>
+  </div>
+</footer>
+
+<!-- ===== FLOATING ELEMENTS ===== -->
+<div class="consult-float" id="consult-float">
+  <div class="consult-label">Free Colour Consultation</div>
+  <a href="https://wa.me/919876543210?text=Hi%20ColorVault!%20I'd%20like%20a%20free%20colour%20consultation." target="_blank" rel="noopener" class="consult-btn" aria-label="WhatsApp colour consultation">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+
+<!-- ===== NOTIFY MODAL ===== -->
+<div class="notify-modal" id="notify-modal">
+  <div class="notify-box">
+    <h3>Notify When Back in Stock</h3>
+    <p>We'll WhatsApp you as soon as this shade is available.</p>
+    <input type="tel" class="form-input" id="notify-phone" placeholder="10-digit mobile number">
+    <div class="notify-actions">
+      <button class="btn btn-outline btn-sm" onclick="closeNotifyModal()">Cancel</button>
+      <button class="btn btn-action btn-sm" onclick="submitNotify()">Notify Me</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== ADD ITEM MODAL ===== -->
+<div class="notify-modal" id="add-item-modal">
+  <div class="notify-box" style="max-width:520px;max-height:80vh;overflow-y:auto;text-align:left">
+    <h3 style="text-align:center;margin-bottom:1rem">Add Item to Booking</h3>
+    <div id="add-item-list"></div>
+    <div class="notify-actions" style="margin-top:1rem">
+      <button class="btn btn-outline btn-sm" onclick="closeAddItemModal()" style="flex:1">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================================================================
+   DATA — Products, hardware, offers
+   =================================================================== */
+const SHOP = {
+  name: 'SMF TRADER',               
+  city: 'Kolkata',                  
+  whatsapp: '919876543210',         
+  address: '42 Park Street, Kolkata 700016', 
+  mapsLink: 'https://maps.google.com/?q=42+Park+Street+Kolkata', 
+};
+
+
+const products = [
+  // === INTERIOR ===
+  {
+    id:'velvet-touch', name:'Opus Velvet Touch', category:'interior',
+    finish:'Luxury Matte', tagline:'Silk-smooth walls that speak luxury',
+    description:'Premium interior emulsion with an ultra-smooth matte finish. Exceptional coverage, anti-fungal properties, and a washable surface that keeps walls looking new for years.',
+    coverage:'120–140 sq ft/litre per coat',
+    shades:[
+      {code:'VT-2101',name:'Champagne Whisper',hex:'#F2E8D5',stock:'in-stock'},
+      {code:'VT-2102',name:'Desert Sand',hex:'#C4A882',stock:'in-stock'},
+      {code:'VT-2103',name:'Terracotta Warm',hex:'#B85A3A',stock:'in-stock'},
+      {code:'VT-2104',name:'Forest Canopy',hex:'#2D5A3D',stock:'limited'},
+      {code:'VT-2105',name:'Midnight Plum',hex:'#3D1F3F',stock:'in-stock'},
+      {code:'VT-2106',name:'Ocean Depth',hex:'#1A3A4A',stock:'in-stock'},
+      {code:'VT-2107',name:'Blush Rose',hex:'#C4737A',stock:'in-stock'},
+      {code:'VT-2108',name:'Slate Storm',hex:'#5A5A62',stock:'order-ahead'},
+    ],
+    packSizes:[1,4,10,20], pricePerLiter:480
+  },
+  {
+    id:'silk-appeal', name:'Opus Silk Appeal', category:'interior',
+    finish:'Satin', tagline:'A gentle sheen that catches the light',
+    description:'Interior satin emulsion with a soft, elegant lustre. Ideal for living rooms and bedrooms where you want depth without gloss. Easy to clean, resistant to stains.',
+    coverage:'110–130 sq ft/litre per coat',
+    shades:[
+      {code:'SA-3201',name:'Pearl Lace',hex:'#F0EBE0',stock:'in-stock'},
+      {code:'SA-3202',name:'Mocha Cream',hex:'#C8B08A',stock:'in-stock'},
+      {code:'SA-3203',name:'Copper Gate',hex:'#A0623A',stock:'in-stock'},
+      {code:'SA-3204',name:'Sage Garden',hex:'#7A9A6A',stock:'in-stock'},
+      {code:'SA-3205',name:'Dusty Mauve',hex:'#9A7A8A',stock:'limited'},
+      {code:'SA-3206',name:'Steel Blue',hex:'#4A6A7A',stock:'in-stock'},
+    ],
+    packSizes:[1,4,10,20], pricePerLiter:520
+  },
+  {
+    id:'easy-clean', name:'Opus Easy Clean', category:'interior',
+    finish:'Washable Matte', tagline:'Kids-proof walls without sacrificing style',
+    description:'High-performance washable interior paint. Scrub-resistant, stain-proof, and still delivers a beautiful matte finish. Perfect for high-traffic areas, kids\' rooms, and kitchens.',
+    coverage:'100–120 sq ft/litre per coat',
+    shades:[
+      {code:'EC-4101',name:'Snowdrift',hex:'#F8F6F0',stock:'in-stock'},
+      {code:'EC-4102',name:'Warm Linen',hex:'#DDD0B8',stock:'in-stock'},
+      {code:'EC-4103',name:'Peach Blossom',hex:'#E8A88A',stock:'in-stock'},
+      {code:'EC-4104',name:'Mint Fresh',hex:'#8ABAA0',stock:'in-stock'},
+      {code:'EC-4105',name:'Lavender Haze',hex:'#A08AB8',stock:'in-stock'},
+      {code:'EC-4106',name:'Charcoal Soft',hex:'#4A4A50',stock:'in-stock'},
+    ],
+    packSizes:[1,4,10,20], pricePerLiter:560
+  },
+  // === EXTERIOR ===
+  {
+    id:'weather-shield', name:'Opus Weather Shield', category:'exterior',
+    finish:'Smooth Exterior', tagline:'Built to take the monsoon head-on',
+    description:'Advanced exterior emulsion with superior weather resistance. Fights UV fading, rain damage, and algae growth. Keeps exterior walls vibrant for up to 8 years.',
+    coverage:'80–100 sq ft/litre per coat',
+    shades:[
+      {code:'WS-5101',name:'Classic Ivory',hex:'#F0E8D8',stock:'in-stock'},
+      {code:'WS-5102',name:'Terracotta Tile',hex:'#B06040',stock:'in-stock'},
+      {code:'WS-5103',name:'Olive Grove',hex:'#6A7A40',stock:'in-stock'},
+      {code:'WS-5104',name:'Skyline Blue',hex:'#5A8AAA',stock:'limited'},
+      {code:'WS-5105',name:'Mocha Exterior',hex:'#8A7A6A',stock:'in-stock'},
+      {code:'WS-5106',name:'Deep Brick',hex:'#8A3A2A',stock:'in-stock'},
+    ],
+    packSizes:[1,4,10,20], pricePerLiter:620
+  },
+  {
+    id:'exterior-silk', name:'Opus Exterior Silk', category:'exterior',
+    finish:'Satin Exterior', tagline:'A premium sheen for facades that stand out',
+    description:'Exterior satin finish with enhanced dirt pickup resistance. Gives your building a polished, high-end look while protecting against harsh weather. Ideal for feature walls and modern facades.',
+    coverage:'75–95 sq ft/litre per coat',
+    shades:[
+      {code:'ES-6101',name:'Champagne Facade',hex:'#E8DCC8',stock:'in-stock'},
+      {code:'ES-6102',name:'Sandy Beige',hex:'#C8B898',stock:'in-stock'},
+      {code:'ES-6103',name:'Copper Sunrise',hex:'#C07040',stock:'order-ahead'},
+      {code:'ES-6104',name:'Forest Edge',hex:'#3A6A3A',stock:'in-stock'},
+      {code:'ES-6105',name:'Slate Facade',hex:'#5A5A60',stock:'in-stock'},
+    ],
+    packSizes:[4,10,20], pricePerLiter:720
+  },
+  // === WOOD & METAL ===
+  {
+    id:'wood-guard', name:'Opus Wood Guard', category:'wood-metal',
+    finish:'Wood Primer + Enamel', tagline:'Protect and beautify every wooden surface',
+    description:'Two-in-one wood protection system: a penetrating primer that seals the grain, followed by a smooth enamel topcoat. Resists termites, moisture, and daily wear. Available in clear and tinted finishes.',
+    coverage:'90–110 sq ft/litre per coat',
+    shades:[
+      {code:'WG-7101',name:'Natural Oak',hex:'#B89868',stock:'in-stock'},
+      {code:'WG-7102',name:'Dark Walnut',hex:'#5A3A20',stock:'in-stock'},
+      {code:'WG-7103',name:'Mahogany',hex:'#6A2020',stock:'in-stock'},
+      {code:'WG-7104',name:'Clear Finish',hex:'#E8DCC8',stock:'in-stock'},
+      {code:'WG-7105',name:'Teak Wood',hex:'#A08040',stock:'limited'},
+    ],
+    packSizes:[1,4,10], pricePerLiter:580
+  },
+  {
+    id:'metal-shield', name:'Opus Metal Shield', category:'wood-metal',
+    finish:'Anti-Rust Enamel', tagline:'Rust doesn\'t stand a chance',
+    description:'High-performance anti-corrosion enamel for gates, grills, pipes, and metal furniture. Provides a tough, chip-resistant finish that withstands moisture and salt air.',
+    coverage:'80–100 sq ft/litre per coat',
+    shades:[
+      {code:'MS-8101',name:'Gloss Black',hex:'#1A1A1A',stock:'in-stock'},
+      {code:'MS-8102',name:'Silver Grey',hex:'#8A8A90',stock:'in-stock'},
+      {code:'MS-8103',name:'Rust Red',hex:'#8A2A1A',stock:'in-stock'},
+      {code:'MS-8104',name:'White Gloss',hex:'#F0F0F0',stock:'in-stock'},
+      {code:'MS-8105',name:'Deep Blue',hex:'#1A2A4A',stock:'in-stock'},
+    ],
+    packSizes:[1,4,10], pricePerLiter:540
+  },
+  // === WATERPROOFING ===
+  {
+    id:'damp-stop', name:'Opus Damp Stop', category:'waterproofing',
+    finish:'Damp-Proof Coating', tagline:'Stop dampness before it starts',
+    description:'Cementitious waterproofing coating for interior walls prone to dampness. Forms a crystalline barrier that blocks moisture without trapping it. Breathable, paintable surface.',
+    coverage:'40–60 sq ft/litre per coat',
+    shades:[
+      {code:'DS-9101',name:'White Base',hex:'#F0F0F0',stock:'in-stock'},
+      {code:'DS-9102',name:'Grey Base',hex:'#9A9A9A',stock:'in-stock'},
+    ],
+    packSizes:[1,4,10,20], pricePerLiter:380
+  },
+  {
+    id:'waterproof-coat', name:'Opus Waterproof Coat', category:'waterproofing',
+    finish:'External Waterproofing', tagline:'Your exterior wall\'s raincoat',
+    description:'Acrylic-based exterior waterproofing coating. Elastomeric membrane that stretches with the wall, bridging hairline cracks. Can be applied directly over existing paint for quick protection.',
+    coverage:'30–50 sq ft/litre per coat',
+    shades:[
+      {code:'WC-0201',name:'Transparent',hex:'#E0E0E0',stock:'in-stock'},
+      {code:'WC-0202',name:'White Topcoat',hex:'#F5F5F5',stock:'in-stock'},
+    ],
+    packSizes:[4,10,20], pricePerLiter:440
+  },
+  {
+    id:'crack-fill', name:'Opus Crack Fill', category:'waterproofing',
+    finish:'Crack Filler', tagline:'No crack too small, no crack too wide',
+    description:'Polymer-modified crack filler for interior and exterior surfaces. Flexible, paintable, and weather-resistant. Handles cracks up to 5mm wide without shrinking or cracking again.',
+    coverage:'15–25 sq ft/kg',
+    shades:[
+      {code:'CF-0301',name:'White',hex:'#F0F0F0',stock:'in-stock'},
+      {code:'CF-0302',name:'Grey',hex:'#8A8A8A',stock:'in-stock'},
+    ],
+    packSizes:[1,4], pricePerLiter:320
+  }
+];
+
+const hardwareItems = [
+  {id:'hw-brush-1',name:'Premium Wall Brush (4")',category:'essentials',price:180,stock:'in-stock',icon:'fa-paintbrush'},
+  {id:'hw-brush-2',name:'Precision Brush (2")',category:'essentials',price:95,stock:'in-stock',icon:'fa-paintbrush'},
+  {id:'hw-roller-1',name:'Foam Roller Set (9")',category:'essentials',price:220,stock:'in-stock',icon:'fa-roller'},
+  {id:'hw-roller-2',name:'Nap Roller Set (9")',category:'essentials',price:280,stock:'limited',icon:'fa-roller'},
+  {id:'hw-tray',name:'Paint Tray with Grid',category:'essentials',price:120,stock:'in-stock',icon:'fa-fill'},
+  {id:'hw-tape',name:'Masking Tape (48mm x 50m)',category:'essentials',price:85,stock:'in-stock',icon:'fa-tape'},
+  {id:'hw-sheet',name:'Drop Sheet (9x12 ft)',category:'essentials',price:250,stock:'in-stock',icon:'fa-broom'},
+  {id:'hw-sand',name:'Sandpaper Set (80/120/220)',category:'essentials',price:65,stock:'in-stock',icon:'fa-screwdriver-wrench'},
+  {id:'hw-putty',name:'Wall Putty (1 kg)',category:'essentials',price:90,stock:'in-stock',icon:'fa-jar'},
+  {id:'hw-primer',name:'Universal Primer (1L)',category:'essentials',price:320,stock:'in-stock',icon:'fa-fill-drip'},
+  {id:'hw-sealant',name:'Silicone Sealant (280ml)',category:'essentials',price:180,stock:'in-stock',icon:'fa-syringe'},
+  {id:'hw-ladder',name:'Folding Step Ladder (5 ft)',category:'essentials',price:1850,stock:'limited',icon:'fa-stairs'},
+];
+
+/* ===================================================================
+   ROUTER — Hash-based in-page navigation
+   =================================================================== */
+let currentPage = '/';
+
+function navigateTo(path, pushState) {
+  if (pushState !== false) {
+    window.location.hash = path;
+  }
+  showPage(path);
+}
+
+function showPage(path) {
+  // Close mobile menu
+  document.getElementById('mobile-menu').classList.remove('open');
+  document.getElementById('hamburger-btn').classList.remove('open');
+  document.getElementById('hamburger-btn').setAttribute('aria-expanded','false');
+
+  // Hide all pages
+  document.querySelectorAll('.page-view').forEach(p => p.classList.remove('active'));
+
+ // Parse path (Fixed to ignore query parameters like ?tab=interior)
+  const cleanPath = path.replace('#','').replace(/^\/+/,'').split('?')[0];
+  const parts = cleanPath.split('/').filter(Boolean);
+
+  if (parts.length === 0 || parts[0] === 'home') {
+    document.getElementById('page-home').classList.add('active');
+    currentPage = '/';
+    initScrollAnimations();
+  } else if (parts[0] === 'catalog') {
+    document.getElementById('page-catalog').classList.add('active');
+    currentPage = '/catalog';
+    const tab = new URLSearchParams(window.location.hash.split('?')[1]).get('tab') || 'interior';
+    renderCatalog(tab);
+  } else if (parts[0] === 'product' && parts[1]) {
+    document.getElementById('page-product').classList.add('active');
+    currentPage = '/product/' + parts[1];
+    renderProductDetail(parts[1]);
+    } else if (parts[0] === 'builder') {
+    document.getElementById('page-builder').classList.add('active');
+    currentPage = '/builder';
+    const tab = new URLSearchParams(window.location.hash.split('?')[1]).get('tab') || 'interior';
+    renderBuilder(tab);
+  } else if (parts[0] === 'calculator') {
+    document.getElementById('page-calculator').classList.add('active');
+    currentPage = '/calculator';
+    initScrollAnimations();
+  } else if (parts[0] === 'book') {
+    if (parts[1] === 'confirmed') {
+      document.getElementById('page-confirmed').classList.add('active');
+      currentPage = '/book/confirmed';
+    } else {
+      document.getElementById('page-book').classList.add('active');
+      currentPage = '/book';
+      initBookingFlow();
+    }
+  } else if (parts[0] === 'trade') {
+    document.getElementById('page-trade').classList.add('active');
+    currentPage = '/trade';
+    initScrollAnimations();
+  } else if (parts[0] === 'store') {
+    document.getElementById('page-store').classList.add('active');
+    currentPage = '/store';
+    initScrollAnimations();
+  } else if (parts[0] === 'about') {
+    document.getElementById('page-about').classList.add('active');
+    currentPage = '/about';
+    initScrollAnimations();
+  } else if (parts[0] === 'reviews') {
+    document.getElementById('page-reviews').classList.add('active');
+    currentPage = '/reviews';
+    initScrollAnimations();
+  } else if (parts[0] === 'offers') {
+    document.getElementById('page-offers').classList.add('active');
+    currentPage = '/offers';
+    initScrollAnimations();
+  } else if (parts[0] === 'contact') {
+    document.getElementById('page-contact').classList.add('active');
+    currentPage = '/contact';
+    initScrollAnimations();
+  } else if (parts[0] === 'owner') {
+    document.getElementById('page-owner').classList.add('active');
+    currentPage = '/owner';
+    renderOwnerDashboard();
+  } else {
+    document.getElementById('page-home').classList.add('active');
+    currentPage = '/';
+    initScrollAnimations();
+  }
+
+  // Scroll to top
+  window.scrollTo({top: 0, behavior: 'instant'});
+
+  // Update header scroll state
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+}
+
+window.addEventListener('hashchange', () => showPage(window.location.hash));
+
+/* ===================================================================
+   UNCUT OPENING SEQUENCE: "Pulse & Split Shutter" (GSAP)
+   =================================================================== */
+window.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('uncut-overlay');
+    const skipBtn = document.getElementById('skip-btn');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    const skipAnimation = () => {
+        if(tl) tl.kill();
+        gsap.set(overlay, { display: 'none' });
+    };
+    
+    // Tappable from frame one, immediately cancels animation
+    skipBtn.addEventListener('click', skipAnimation);
+
+    let tl = gsap.timeline({ onComplete: skipAnimation });
+
+    // Fallback: Skip motion, show only static wordmark + draw
+    if (reducedMotion || !window.gsap) {
+        gsap.set(['#shutter-top', '#shutter-bottom', '#pulse-container', skipBtn], { display: 'none' });
+        gsap.set('#reveal-wordmark', { opacity: 1 });
+        gsap.set('#wordmark-line', { scaleX: 1 });
+        setTimeout(skipAnimation, 500);
+        return;
+    }
+
+    // Initial setup
+    gsap.set(['#p-ring-1', '#p-ring-2', '#p-ring-3'], { width: 0, height: 0, opacity: 0 });
+    gsap.set('#p-dot', { scale: 1, opacity: 1 });
+    gsap.set('#wordmark-line', { scaleX: 0, transformOrigin: "left center" });
+    gsap.set(['#shutter-top', '#shutter-bottom'], { yPercent: 0 });
+
+    // 1. (0.0s–0.8s) The Pulse Awakens
+    tl.to('#p-ring-1', { width: 80, height: 80, opacity: 0, duration: 0.8, ease: "power2.out" }, 0.0);
+    
+    // 2. (0.8s–1.6s) Building Energy
+    tl.to('#p-dot', { scale: 1.4, duration: 0.2, yoyo: true, repeat: 1, ease: "power1.inOut" }, 0.8);
+    tl.to('#p-ring-2', { width: 140, height: 140, opacity: 0.2, duration: 0.5, ease: "power2.out" }, 1.0);
+    
+    tl.to('#p-dot', { scale: 1.8, duration: 0.15, yoyo: true, repeat: 1, ease: "power1.inOut" }, 1.3);
+    tl.to('#p-ring-3', { width: 200, height: 200, opacity: 0.6, duration: 0.3, ease: "power2.out" }, 1.3);
+
+    // 3. (1.6s–2.2s) The Final Pulse flattens into the Seam
+    tl.to('#p-ring-3', { 
+        borderRadius: "0%", 
+        width: "100vw", 
+        height: "4px", 
+        backgroundColor: "var(--sky-surge)", 
+        borderWidth: "0px",
+        opacity: 1,
+        duration: 0.6, 
+        ease: "expo.inOut" 
+    }, 1.6);
+    tl.to('#p-dot', { scale: 0, opacity: 0, duration: 0.2, ease: "power2.in" }, 1.6);
+
+    // 4. (2.2s–3.0s) The Shutter Panels Split (Top goes up, Bottom goes down)
+    tl.to('#shutter-top', { yPercent: -100, duration: 0.8, ease: "power4.inOut" }, 2.2);
+    tl.to('#shutter-bottom', { yPercent: 100, duration: 0.8, ease: "power4.inOut" }, 2.2);
+    tl.to('#p-ring-3', { opacity: 0, duration: 0.3, ease: "power4.inOut" }, 2.2); // Fade out the blue seam as it opens
+
+    // 5. (3.0s–3.4s) Wordmark Settles
+    tl.to('#reveal-wordmark', { opacity: 1, duration: 0.1 }, 3.0);
+    tl.to('#wordmark-line', { scaleX: 1, duration: 0.4, ease: "power3.out" }, 3.0);
+
+    // 6. (3.4s onward) Settle into Home
+    tl.to('#reveal-wordmark', { scale: 0.95, opacity: 0, duration: 0.4, ease: "power2.inOut" }, 3.6);
+    tl.to(skipBtn, { opacity: 0, duration: 0.2 }, 3.6);
+    tl.to(overlay, { opacity: 0, duration: 0.2 }, 3.8);
+});
+
+/* ===================================================================
+   HEADER — Scroll shadow, hamburger
+   =================================================================== */
+window.addEventListener('scroll', () => {
+  document.getElementById('header').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+document.getElementById('hamburger-btn').addEventListener('click', function() {
+  const isOpen = this.classList.toggle('open');
+  document.getElementById('mobile-menu').classList.toggle('open', isOpen);
+  this.setAttribute('aria-expanded', isOpen);
+});
+
+/* ===================================================================
+   CATALOG — Tabs, filters, grid
+   =================================================================== */
+const categories = [
+  {key:'interior', label:'Interior'},
+  {key:'exterior', label:'Exterior'},
+  {key:'wood-metal', label:'Wood & Metal'},
+  {key:'waterproofing', label:'Waterproofing'},
+  {key:'essentials', label:'Home Essentials', isEssentials:true}
+];
+
+let currentCatTab = 'interior';
+let currentPackFilter = 'all';
+
+function renderCatalog(tab) {
+  currentCatTab = tab || 'interior';
+  currentPackFilter = 'all';
+
+  // Render tabs
+  const tabsEl = document.getElementById('catalog-tabs');
+  tabsEl.innerHTML = categories.map(c =>
+    `<button class="catalog-tab ${c.key === currentCatTab ? 'active' : ''} ${c.isEssentials ? 'essentials-tab' : ''}"
+      role="tab" aria-selected="${c.key === currentCatTab}"
+      onclick="renderCatalog('${c.key}')">${c.label}</button>`
+  ).join('');
+
+  // Render filters
+  const filtersEl = document.getElementById('catalog-filters');
+  if (currentCatTab === 'essentials') {
+    filtersEl.innerHTML = '';
+  } else {
+    filtersEl.innerHTML = `
+      <span style="font-family:var(--font-structural);font-size:0.78rem;color:rgba(26,14,18,0.4);text-transform:uppercase;letter-spacing:0.06em">Pack Size:</span>
+      ${['all','1L','4L','10L','20L'].map(s =>
+        `<button class="filter-chip ${s === 'all' ? 'active' : ''}" onclick="filterByPack('${s}')">${s === 'all' ? 'All' : s}</button>`
+      ).join('')}
+    `;
+  }
+
+  // Render grid
+  renderCatalogGrid();
+}
+
+function filterByPack(size) {
+  currentPackFilter = size;
+  document.querySelectorAll('.filter-chip').forEach(c => {
+    c.classList.toggle('active', c.textContent.trim() === (size === 'all' ? 'All' : size));
+  });
+  renderCatalogGrid();
+}
+
+function renderCatalogGrid() {
+  const grid = document.getElementById('catalog-grid');
+
+  if (currentCatTab === 'essentials') {
+    grid.innerHTML = `<div class="grid-2" style="gap:0.75rem">${hardwareItems.map(item => `
+      <div class="hardware-card anim-in">
+        <div class="hw-icon"><i class="fa-solid ${item.icon}"></i></div>
+        <div class="hw-info">
+          <h4>${item.name}</h4>
+          <p>${getStockBadge(item.stock)}</p>
+        </div>
+        <div class="hw-price">&#8377;${item.price}</div>
+      </div>
+    `).join('')}</div>`;
+    initScrollAnimations();
+    return;
+  }
+
+  const filtered = products.filter(p => p.category === currentCatTab);
+  const packNum = currentPackFilter === 'all' ? 0 : parseInt(currentPackFilter);
+
+  grid.innerHTML = `<div class="grid-3">${filtered.map(p => {
+    const relevantPack = packNum > 0 ? packNum : p.packSizes[0];
+    const price = relevantPack * p.pricePerLiter;
+    const hasRelevantPack = packNum === 0 || p.packSizes.includes(packNum);
+
+    return `
+    <div class="product-card anim-in" style="${!hasRelevantPack ? 'opacity:0.4;pointer-events:none' : ''}">
+      <div class="shades-row">
+        ${p.shades.slice(0, 6).map(s => {
+          const isLight = isLightColor(s.hex);
+          return `<div class="swatch shade-dot ${isLight ? 'light-swatch' : ''}"
+            style="background:${s.hex}" title="${s.name} (${s.code})"
+            onclick="navigateTo('/product/${p.id}?shade=${s.code}')"></div>`;
+        }).join('')}
+        ${p.shades.length > 6 ? `<div class="shade-dot" style="background:var(--cream);border:2px dashed rgba(26,14,18,0.15);display:flex;align-items:center;justify-content:center;font-family:var(--font-structural);font-size:0.65rem;color:rgba(26,14,18,0.4)">+${p.shades.length - 6}</div>` : ''}
+      </div>
+      <div class="card-body">
+        <h4>${p.name}</h4>
+        <p class="finish-label">${p.finish}</p>
+        <div class="card-bottom">
+          <span class="price">${hasRelevantPack ? '&#8377;' + price + ' / ' + (packNum > 0 ? packNum + 'L' : p.packSizes[0] + 'L') : 'N/A in ' + currentPackFilter}</span>
+          ${hasRelevantPack ? `<button class="btn btn-action btn-sm" onclick="addToBookingAndGo('${p.id}','${p.shades[0].code}',${relevantPack})">Book</button>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+
+  initScrollAnimations();
+}
+
+/* ===================================================================
+   PRODUCT DETAIL
+   =================================================================== */
+function renderProductDetail(productId, shadeCode) {
+  const product = products.find(p => p.id === productId);
+  if (!product) { navigateTo('/catalog'); return; }
+
+  const shade = shadeCode
+    ? product.shades.find(s => s.code === shadeCode) || product.shades[0]
+    : product.shades[0];
+
+  const container = document.getElementById('product-detail-content');
+  container.innerHTML = `
+    <a class="back-link" onclick="navigateTo('/catalog?tab=${product.category}')"><i class="fa-solid fa-arrow-left"></i> Back to Catalog</a>
+    <div class="pd-top">
+      <div class="pd-shade-preview" style="background:${shade.hex}">
+        <div class="sheen"></div>
+      </div>
+      <div class="pd-info">
+        <p class="eyebrow">${product.category.replace('-',' & ')} / ${product.finish}</p>
+        <h1>${shade.name}</h1>
+        <p class="pd-code">${shade.code} — ${product.name}</p>
+        <p class="pd-desc">${product.description}</p>
+        <p class="pd-coverage"><i class="fa-solid fa-ruler-combined" style="margin-right:0.3rem"></i> ${product.coverage}</p>
+        <p style="margin-bottom:0.5rem">${getStockBadge(shade.stock)}</p>
+        <h4 style="margin-bottom:0.5rem;font-size:0.85rem">Select Pack Size</h4>
+        <div class="pack-sizes" id="pd-pack-sizes">
+          ${product.packSizes.map(s =>
+            `<button class="pack-btn ${s === product.packSizes[1] || s === product.packSizes[0] ? 'active' : ''}"
+              data-size="${s}" onclick="selectPackSize(this,${s},${product.pricePerLiter})">${s}L — &#8377;${s * product.pricePerLiter}</button>`
+          ).join('')}
+        </div>
+        <div style="display:flex;gap:0.75rem;flex-wrap:wrap">
+          <button class="btn btn-action" onclick="addToBookingAndGo('${product.id}','${shade.code}',${product.packSizes[1] || product.packSizes[0]})"><i class="fa-solid fa-bag-shopping"></i> Book Pickup</button>
+          ${shade.stock !== 'in-stock' ? `<button class="btn btn-outline btn-sm" onclick="openNotifyModal('${shade.code}')">Notify When in Stock</button>` : ''}
+          <a href="https://wa.me/${SHOP.whatsapp}?text=Hi!%20I'd%20like%20a%20free%20colour%20consultation%20for%20${encodeURIComponent(shade.name)}%20(${shade.code})." target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fa-brands fa-whatsapp"></i> Consult</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Embedded calculator widget -->
+    <div class="calc-widget">
+      <h4><i class="fa-solid fa-calculator" style="margin-right:0.4rem;color:var(--sky-surge)"></i> Quick Quantity Check</h4>
+      <div class="calc-row">
+        <div class="form-group">
+          <label class="form-label">Wall Area (sq ft)</label>
+          <input type="number" class="form-input" id="pd-calc-area" placeholder="e.g. 400">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Coats</label>
+          <select class="form-input" id="pd-calc-coats">
+            <option value="1">1</option><option value="2" selected>2</option><option value="3">3</option>
+          </select>
+        </div>
+      </div>
+      <div class="calc-result" id="pd-calc-result" style="display:none"></div>
+      <button class="btn btn-action btn-sm" onclick="runPdCalc()" style="margin-top:0.5rem">Calculate</button>
+    </div>
+
+    <!-- Bundle upsells -->
+    <h3 style="margin-bottom:0.75rem;font-size:0.95rem">Frequently Bought Together</h3>
+    <div class="bundle-row">
+      <div class="bundle-item"><i class="fa-solid fa-paintbrush"></i><span class="b-name">Wall Brush 4"</span><span class="b-price">&#8377;180</span></div>
+      <div class="bundle-item"><i class="fa-solid fa-roller"></i><span class="b-name">Roller Set 9"</span><span class="b-price">&#8377;220</span></div>
+      <div class="bundle-item"><i class="fa-solid fa-fill"></i><span class="b-name">Paint Tray</span><span class="b-price">&#8377;120</span></div>
+      <div class="bundle-item"><i class="fa-solid fa-fill-drip"></i><span class="b-name">Primer 1L</span><span class="b-price">&#8377;320</span></div>
+      <div class="bundle-item"><i class="fa-solid fa-tape"></i><span class="b-name">Masking Tape</span><span class="b-price">&#8377;85</span></div>
+    </div>
+
+    <!-- All shades -->
+    <div class="other-shades">
+      <h3>All Shades in ${product.name}</h3>
+      <div class="other-shades-grid">
+        ${product.shades.map(s => `
+          <div class="other-shade ${isLightColor(s.hex) ? 'light' : ''}"
+            style="background:${s.hex};${s.code === shade.code ? 'border-color:var(--sky-surge);box-shadow:0 0 0 2px var(--sky-surge)' : ''}"
+            onclick="renderProductDetail('${product.id}','${s.code}')">
+            <div class="shade-tooltip">${s.name}<br>${s.code} ${getStockBadgeSmall(s.stock)}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  initScrollAnimations();
+}
+
+function selectPackSize(el, size, pricePerLiter) {
+  document.querySelectorAll('.pack-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function runPdCalc() {
+  const area = parseFloat(document.getElementById('pd-calc-area').value);
+  const coats = parseInt(document.getElementById('pd-calc-coats').value);
+  if (!area || area <= 0) { showToast('Enter a valid wall area'); return; }
+  const coverage = 120; // avg for interior
+  const litres = Math.ceil((area * coats) / coverage);
+  const result = document.getElementById('pd-calc-result');
+  result.style.display = 'block';
+  result.innerHTML = `<i class="fa-solid fa-check-circle" style="margin-right:0.3rem"></i> You need approximately <strong>${litres} litres</strong> for ${area} sq ft with ${coats} coat${coats>1?'s':''}.`;
+}
+
+/* ===================================================================
+   CALCULATOR (standalone)
+   =================================================================== */
+function runCalc() {
+  const l = parseFloat(document.getElementById('calc-length').value);
+  const w = parseFloat(document.getElementById('calc-width').value);
+  const h = parseFloat(document.getElementById('calc-height').value);
+  const coats = parseInt(document.getElementById('calc-coats').value);
+  const surface = document.getElementById('calc-surface').value;
+  const openings = parseFloat(document.getElementById('calc-openings').value) || 0;
+
+  if (!l || !w || !h || l <= 0 || w <= 0 || h <= 0) {
+    showToast('Enter valid room dimensions');
+    return;
+  }
+
+  // Wall area = 2*(l+w)*h - openings, ceiling = l*w
+  const wallArea = Math.max(0, 2 * (l + w) * h - openings);
+  const coverageMap = {smooth: 130, medium: 100, rough: 70};
+  const coverage = coverageMap[surface] || 100;
+  const litres = Math.ceil((wallArea * coats) / coverage);
+
+  // Suggest pack combo
+  const packs = suggestPacks(litres);
+
+  document.getElementById('calc-liters').innerHTML = `${litres} <span>litres</span>`;
+  document.getElementById('calc-packs').textContent = packs;
+  document.getElementById('calc-output').style.display = 'block';
+  document.getElementById('calc-run-btn').style.display = 'none';
+}
+
+function suggestPacks(litres) {
+  if (litres <= 1) return '1 x 1L pack';
+  if (litres <= 4) return '1 x 4L pack';
+  if (litres <= 10) return litres <= 8 ? '2 x 4L packs' : '1 x 10L pack';
+  if (litres <= 20) return litres <= 14 ? '1 x 10L + 1 x 4L' : '1 x 20L pack';
+  const twenties = Math.floor(litres / 20);
+  const rem = litres % 20;
+  let s = twenties + ' x 20L';
+  if (rem > 0) {
+    if (rem <= 4) s += ' + 1 x 4L';
+    else if (rem <= 10) s += ' + 1 x 10L';
+    else s += ' + 1 x 20L';
+  }
+  return s;
+}
+
+function resetCalc() {
+  document.getElementById('calc-output').style.display = 'none';
+  document.getElementById('calc-run-btn').style.display = '';
+}
+
+function bookFromCalc() {
+  // Parse litres from the display
+  const match = document.getElementById('calc-liters').textContent.match(/(\d+)/);
+  if (match) {
+    bookingState.items = [];
+    bookingState.items.push({
+      name: 'Custom Quantity',
+      shade: 'Calculated',
+      shadeHex: '#5DB7DE',
+      size: parseInt(match[1]),
+      price: parseInt(match[1]) * 480 // approximate
+    });
+  }
+  navigateTo('/book');
+}
+
+/* ===================================================================
+   BOOKING FLOW
+   =================================================================== */
+let bookingState = {
+  items: [],
+  date: null,
+  time: null,
+  name: '',
+  phone: '',
+  notes: '',
+  optin: true,
+  step: 0
+};
+
+function initBookingFlow() {
+  bookingState.step = 0;
+  // If no items, add a default prompt
+  if (bookingState.items.length === 0) {
+    // Show empty state — user must add items
+  }
+  renderBookingStep();
+  renderDateGrid();
+  renderTimeGrid();
+}
+
+function addToBookingAndGo(productId, shadeCode, packSize) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  const shade = product.shades.find(s => s.code === shadeCode) || product.shades[0];
+
+  // Remove existing item with same product+shade+size
+  bookingState.items = bookingState.items.filter(i =>
+    !(i.productId === productId && i.shadeCode === shadeCode && i.size === packSize)
+  );
+
+  bookingState.items.push({
+    productId,
+    name: product.name,
+    shade: shade.name + ' (' + shade.code + ')',
+    shadeHex: shade.hex,
+    shadeCode: shade.code,
+    size: packSize,
+    price: packSize * product.pricePerLiter
+  });
+
+  navigateTo('/book');
+}
+
+function renderBookingStep() {
+  const track = document.getElementById('booking-track');
+  track.style.transform = `translateX(-${bookingState.step * 100}%)`;
+
+  // Update progress indicators
+  document.querySelectorAll('.bp-step').forEach(s => {
+    const step = parseInt(s.dataset.step);
+    s.classList.remove('active', 'done');
+    if (step === bookingState.step) s.classList.add('active');
+    else if (step < bookingState.step) s.classList.add('done');
+  });
+
+  // Render items list for step 0
+  if (bookingState.step === 0) {
+    const list = document.getElementById('book-items-list');
+    if (bookingState.items.length === 0) {
+      list.innerHTML = `<div style="text-align:center;padding:2rem;color:rgba(26,14,18,0.4)">
+        <i class="fa-solid fa-bag-shopping" style="font-size:2rem;margin-bottom:0.5rem;display:block"></i>
+        <p>No items added yet. Click "Add another item" below or browse the catalog first.</p>
+      </div>`;
+    } else {
+      list.innerHTML = bookingState.items.map((item, i) => `
+        <div class="recap-item">
+          <div class="recap-swatch" style="background:${item.shadeHex}"></div>
+          <div class="recap-info">
+            <h4>${item.name}</h4>
+            <p>${item.shade} — ${item.size}L — &#8377;${item.price}</p>
+          </div>
+          <button class="recap-remove" onclick="removeBookingItem(${i})" aria-label="Remove item"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Render review for step 3
+  if (bookingState.step === 3) {
+    const review = document.getElementById('review-card-content');
+    const dateStr = bookingState.date ? formatDate(bookingState.date) : 'Not selected';
+    review.innerHTML = `
+      <h4>Booking Summary</h4>
+      ${bookingState.items.map(item => `
+        <div class="review-row">
+          <span class="label">${item.name}</span>
+          <span>${item.shade} — ${item.size}L</span>
+        </div>
+      `).join('')}
+      <div class="review-row"><span class="label">Pickup Date</span><span>${dateStr}</span></div>
+      <div class="review-row"><span class="label">Time Slot</span><span>${bookingState.time || 'Not selected'}</span></div>
+      <div class="review-row"><span class="label">Name</span><span>${bookingState.name || 'Not entered'}</span></div>
+      <div class="review-row"><span class="label">Phone</span><span>${bookingState.phone || 'Not entered'}</span></div>
+      ${bookingState.notes ? `<div class="review-row"><span class="label">Notes</span><span>${bookingState.notes}</span></div>` : ''}
+      <div class="review-row" style="border-top:2px solid rgba(26,14,18,0.08);margin-top:0.5rem;padding-top:0.75rem">
+        <span class="label" style="font-weight:600">Estimated Total</span>
+        <span style="font-family:var(--font-structural);font-weight:700;font-size:1.1rem">&#8377;${bookingState.items.reduce((s,i)=>s+i.price,0)}</span>
+      </div>
+    `;
+  }
+}
+function removeBookingItem(index) {
+  bookingState.items.splice(index, 1);
+  renderBookingStep();
+  if (typeof updateCartFloat === 'function') updateCartFloat();
+}
+
+function bookingNext() {
+  // Validate current step
+  if (bookingState.step === 0 && bookingState.items.length === 0) {
+    showToast('Add at least one item to book');
+    return;
+  }
+  if (bookingState.step === 1 && (!bookingState.date || !bookingState.time)) {
+    showToast('Select a date and time slot');
+    return;
+  }
+  if (bookingState.step === 2) {
+    const name = document.getElementById('book-name').value.trim();
+    const phone = document.getElementById('book-phone').value.trim();
+    if (!name) { showToast('Enter your name'); return; }
+    if (!phone || phone.length < 10) { showToast('Enter a valid phone number'); return; }
+    bookingState.name = name;
+    bookingState.phone = phone;
+    bookingState.notes = document.getElementById('book-notes').value.trim();
+    bookingState.optin = document.getElementById('book-optin').checked;
+  }
+  if (bookingState.step < 3) {
+    bookingState.step++;
+    renderBookingStep();
+  }
+}
+
+function bookingPrev() {
+  if (bookingState.step > 0) {
+    bookingState.step--;
+    renderBookingStep();
+  }
+}
+
+function renderDateGrid() {
+  const grid = document.getElementById('date-grid');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const today = new Date();
+  let html = '';
+  for (let i = 1; i <= 7; i++) {
+    const d = new Date(today);
+    d.setDate(d.getDate() + i);
+    const dateStr = d.toISOString().split('T')[0];
+    const isSelected = bookingState.date === dateStr;
+    html += `<div class="date-cell ${isSelected ? 'selected' : ''}" onclick="selectDate('${dateStr}',this)">
+      <div class="day-name">${days[d.getDay()]}</div>
+      <div class="day-num">${d.getDate()}</div>
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function selectDate(dateStr, el) {
+  bookingState.date = dateStr;
+  document.querySelectorAll('.date-cell').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function renderTimeGrid() {
+  const grid = document.getElementById('time-grid');
+  const slots = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM','7:00 PM'];
+  // Randomly mark a couple slots as unavailable for realism
+  const unavailable = new Set();
+  const today = new Date();
+  if (bookingState.date) {
+    const seed = bookingState.date.split('-').join('');
+    unavailable.add(slots[parseInt(seed) % slots.length]);
+    unavailable.add(slots[(parseInt(seed) + 5) % slots.length]);
+  }
+
+  grid.innerHTML = slots.map(s => {
+    const isUnavail = unavailable.has(s);
+    const isSelected = bookingState.time === s;
+    return `<div class="time-cell ${isSelected ? 'selected' : ''} ${isUnavail ? 'unavailable' : ''}"
+      onclick="${isUnavail ? '' : `selectTime('${s}',this)`}">${s}${isUnavail ? ' (Full)' : ''}</div>`;
+  }).join('');
+}
+
+function selectTime(timeStr, el) {
+  bookingState.time = timeStr;
+  document.querySelectorAll('.time-cell').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+/* ===================================================================
+   SUBMIT BOOKING — Generates WhatsApp message, saves to local storage
+   =================================================================== */
+function submitBooking() {
+  const itemsText = bookingState.items.map(i =>
+    `• ${i.name} — ${i.shade} — ${i.size}L (₹${i.price})`
+  ).join('\n');
+
+  const total = bookingState.items.reduce((s, i) => s + i.price, 0);
+
+  const msg = `Hi ${SHOP.name}! I'd like to book a pickup:\n\n${itemsText}\n\n📅 Date: ${formatDate(bookingState.date)}\n🕐 Time: ${bookingState.time}\n👤 Name: ${bookingState.name}\n📞 Phone: ${bookingState.phone}${bookingState.notes ? '\n📝 Notes: ' + bookingState.notes : ''}\n\n💰 Estimated Total: ₹${total}${bookingState.optin ? '\n\n✅ I\'d like to receive shade launches & offers via WhatsApp.' : ''}`;
+
+  // Save to local storage for owner dashboard
+  const booking = {
+    id: 'BK-' + Date.now().toString(36).toUpperCase(),
+    items: bookingState.items,
+    date: bookingState.date,
+    time: bookingState.time,
+    name: bookingState.name,
+    phone: bookingState.phone,
+    notes: bookingState.notes,
+    optin: bookingState.optin,
+    total: total,
+    status: 'pending',
+    createdAt: new Date().toISOString()
+  };
+
+  let bookings = JSON.parse(localStorage.getItem('colorvault_bookings') || '[]');
+  bookings.unshift(booking);
+  localStorage.setItem('colorvault_bookings', JSON.stringify(bookings));
+
+  // Open WhatsApp
+  const waUrl = `https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(msg)}`;
+  window.open(waUrl, '_blank');
+
+  // Navigate to confirmation
+  lastBooking = booking;
+  navigateTo('/book/confirmed');
+}
+
+let lastBooking = null;
+
+function renderConfirmation() {
+  if (!lastBooking) {
+    navigateTo('/');
+    return;
+  }
+  const b = lastBooking;
+  const container = document.getElementById('confirm-content');
+
+  // Build calendar link
+  const dateParts = b.date.split('-');
+  const calDate = dateParts[0] + dateParts[1] + dateParts[2];
+  const timeParts = b.time.match(/(\d+):(\d+)\s*(AM|PM)/i);
+  let calHour = parseInt(timeParts[1]);
+  if (timeParts[3].toUpperCase() === 'PM' && calHour !== 12) calHour += 12;
+  if (timeParts[3].toUpperCase() === 'AM' && calHour === 12) calHour = 0;
+  const calMin = parseInt(timeParts[2]);
+  const calUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=Paint%20Pickup%20-%20${encodeURIComponent(SHOP.name)}&dates=${calDate}T${String(calHour).padStart(2,'0')}${String(calMin).padStart(2,'0')}00/${calDate}T${String(calHour + 1).padStart(2,'0')}${String(calMin).padStart(2,'0')}00&location=${encodeURIComponent(SHOP.address)}&details=${encodeURIComponent('Pickup booking: ' + b.items.map(i => i.name + ' ' + i.size + 'L').join(', '))}`;
+
+  container.innerHTML = `
+    <div class="confirm-check">
+      <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="36" stroke="var(--sky-surge)" stroke-width="3" class="brush-stroke" fill="none"/>
+        <path d="M24 42 L34 52 L56 30" stroke="var(--sky-surge)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" class="check-mark"/>
+      </svg>
+    </div>
+    <h1>Your Paint Will Be Ready</h1>
+    <p class="confirm-sub">Booking confirmed. Your paint will be mixed and waiting at ${SHOP.name}.</p>
+    <div class="confirm-details">
+      <div class="review-row"><span class="label">Booking ID</span><span style="font-family:var(--font-structural);font-weight:600">${b.id}</span></div>
+      ${b.items.map(i => `
+        <div class="review-row">
+          <span class="label" style="display:flex;align-items:center;gap:0.4rem"><span style="display:inline-block;width:16px;height:16px;border-radius:3px;background:${i.shadeHex};border:1px solid rgba(26,14,18,0.1)"></span> ${i.name}</span>
+          <span>${i.shade} — ${i.size}L</span>
+        </div>
+      `).join('')}
+      <div class="review-row"><span class="label">Pickup Date</span><span>${formatDate(b.date)}</span></div>
+      <div class="review-row"><span class="label">Time Slot</span><span>${b.time}</span></div>
+      <div class="review-row"><span class="label">Name</span><span>${b.name}</span></div>
+      <div class="review-row"><span class="label">Phone</span><span>${b.phone}</span></div>
+      <div class="review-row" style="border-top:2px solid rgba(26,14,18,0.08);margin-top:0.5rem;padding-top:0.75rem">
+        <span class="label" style="font-weight:600">Estimated Total</span>
+        <span style="font-family:var(--font-structural);font-weight:700;font-size:1.1rem">₹${b.total}</span>
+      </div>
+    </div>
+    <div class="confirm-actions">
+      <a href="${calUrl}" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fa-solid fa-calendar-plus"></i> Add to Calendar</a>
+      <a href="${SHOP.mapsLink}" target="_blank" rel="noopener" class="btn btn-outline btn-sm"><i class="fa-solid fa-diamond-turn-right"></i> Get Directions</a>
+      <a href="#/" class="btn btn-action btn-sm">Back to Home</a>
+    </div>
+    <p class="confirm-note">We'll follow up after your pickup for a quick review — your feedback helps us improve.</p>
+  `;
+}
+/* ===================================================================
+   QUICK ORDER BUILDER & CART LOGIC
+   =================================================================== */
+function renderBuilder(activeTab) {
+  // Render Tabs
+  const tabsEl = document.getElementById('builder-tabs');
+  tabsEl.innerHTML = categories.map(c =>
+    `<button class="catalog-tab ${c.key === activeTab ? 'active' : ''}"
+      onclick="navigateTo('/builder?tab=${c.key}')">${c.label}</button>`
+  ).join('');
+
+  // Render Content
+  const content = document.getElementById('builder-content');
+  if (activeTab === 'essentials') {
+    content.innerHTML = `<div class="grid-4">${hardwareItems.map(hw => `
+      <div class="builder-shade-card" style="display:flex; flex-direction:column; justify-content:space-between; height:100%;">
+        <div>
+          <i class="fa-solid ${hw.icon}" style="font-size:2rem; color:var(--ink); opacity:0.6; margin:1rem 0;"></i>
+          <h4>${hw.name}</h4>
+          <p style="margin-bottom:1rem;">₹${hw.price} ${getStockBadgeSmall(hw.stock)}</p>
+        </div>
+        <button class="btn btn-action btn-sm" style="width:100%; justify-content:center;" onclick="addHardwareFast('${hw.id}')">+ Add</button>
+      </div>
+    `).join('')}</div>`;
+  } else {
+    const catProducts = products.filter(p => p.category === activeTab);
+    content.innerHTML = catProducts.map(p => `
+      <div style="margin-bottom:3rem;" class="anim-in">
+        <h2 style="font-size:1.5rem; margin-bottom:0.25rem;">${p.name}</h2>
+        <p style="color:rgba(26,14,18,0.6); margin-bottom:1.5rem; font-size:0.9rem;">${p.finish} — starting at ₹${p.packSizes[0] * p.pricePerLiter}</p>
+        <div class="builder-shade-grid">
+          ${p.shades.map(s => `
+            <div class="builder-shade-card" onclick="showSizeSelectorModal('${p.id}', '${s.code}')">
+              <div class="builder-shade-color" style="background:${s.hex}; ${isLightColor(s.hex) ? 'border-color:rgba(26,14,18,0.2)' : ''}"></div>
+              <h4>${s.name}</h4>
+              <p>${s.code}</p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+    initScrollAnimations();
+  }
+  updateCartFloat();
+}
+
+function showSizeSelectorModal(productId, shadeCode) {
+  const product = products.find(p => p.id === productId);
+  const shade = product.shades.find(s => s.code === shadeCode);
+  const content = document.getElementById('size-modal-content');
+
+  content.innerHTML = `
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <div style="width:60px; height:60px; border-radius:8px; background:${shade.hex}; margin:0 auto 0.5rem; border:1px solid rgba(26,14,18,0.1)"></div>
+      <h4 style="font-size:1.1rem">${shade.name}</h4>
+      <p style="color:rgba(26,14,18,0.5); font-size:0.85rem">${product.name}</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+      ${product.packSizes.map(sz => `
+        <button class="btn btn-action" style="width:100%; justify-content:space-between; padding:0.75rem 1rem; background:rgba(93,183,222,0.1); color:var(--ink); border:1px solid var(--sky-surge);"
+          onclick="addToBookingFast('${product.id}', '${shade.code}', ${sz}); document.getElementById('size-modal').classList.remove('open');">
+          <span>${sz} Litre Pack</span>
+          <span style="font-weight:700; color:var(--sky-surge);">₹${sz * product.pricePerLiter}</span>
+        </button>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('size-modal').classList.add('open');
+}
+
+function updateCartFloat() {
+  const cartFloat = document.getElementById('cart-float');
+  const cartBadge = document.getElementById('cart-badge');
+  if (bookingState.items.length > 0) {
+    cartFloat.style.display = 'flex';
+    cartBadge.textContent = bookingState.items.length;
+  } else {
+    cartFloat.style.display = 'none';
+  }
+}
+
+function addToBookingFast(productId, shadeCode, packSize) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  const shade = product.shades.find(s => s.code === shadeCode) || product.shades[0];
+  
+  bookingState.items.push({
+    productId, name: product.name, shade: shade.name + ' (' + shade.code + ')',
+    shadeHex: shade.hex, shadeCode: shade.code, size: packSize, price: packSize * product.pricePerLiter
+  });
+  updateCartFloat();
+  showToast(`${shade.name} (${packSize}L) added to order!`);
+}
+
+function addHardwareFast(hwId) {
+  const hw = hardwareItems.find(h => h.id === hwId);
+  if (!hw) return;
+  
+  bookingState.items.push({
+    hwId: hw.id, name: hw.name, shade: 'Hardware', shadeHex: '#E8E0D0', size: 1, price: hw.price
+  });
+  updateCartFloat();
+  showToast(`${hw.name} added to order!`);
+}
+
+/* ===================================================================
+   HELPERS
+   =================================================================== */
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  const d = new Date(dateStr + 'T00:00:00');
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+}
+
+function getStockBadge(stock) {
+  if (stock === 'in-stock') return '<span class="badge badge-stock"><i class="fa-solid fa-circle" style="font-size:0.4rem"></i> In Stock</span>';
+  if (stock === 'limited') return '<span class="badge badge-limited"><i class="fa-solid fa-circle" style="font-size:0.4rem"></i> Limited</span>';
+  return '<span class="badge badge-order"><i class="fa-solid fa-circle" style="font-size:0.4rem"></i> Order Ahead</span>';
+}
+
+function getStockBadgeSmall(stock) {
+  if (stock === 'in-stock') return '<span style="color:var(--sky-surge)">●</span>';
+  if (stock === 'limited') return '<span style="color:rgba(26,14,18,0.4)">●</span>';
+  return '<span style="color:var(--rosewood)">●</span>';
+}
+
+function isLightColor(hex) {
+  const c = hex.replace('#','');
+  const r = parseInt(c.substr(0,2),16);
+  const g = parseInt(c.substr(2,2),16);
+  const b = parseInt(c.substr(4,2),16);
+  return (r * 0.299 + g * 0.587 + b * 0.114) > 186;
+}
+
+/* ===================================================================
+   NOTIFY MODAL (back-in-stock)
+   =================================================================== */
+let notifyShadeCode = '';
+
+function openNotifyModal(shadeCode) {
+  notifyShadeCode = shadeCode;
+  document.getElementById('notify-phone').value = '';
+  document.getElementById('notify-modal').classList.add('open');
+}
+
+function closeNotifyModal() {
+  document.getElementById('notify-modal').classList.remove('open');
+}
+
+function submitNotify() {
+  const phone = document.getElementById('notify-phone').value.trim();
+  if (!phone || phone.length < 10) {
+    showToast('Enter a valid phone number');
+    return;
+  }
+  // Send WhatsApp notification request
+  const msg = `Hi ${SHOP.name}! Please notify me when shade ${notifyShadeCode} is back in stock. My number: ${phone}.`;
+  window.open(`https://wa.me/${SHOP.whatsapp}?text=${encodeURIComponent(msg)}`, '_blank');
+  closeNotifyModal();
+  showToast('Notification request sent');
+}
+
+// Close modals on backdrop click
+document.getElementById('notify-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeNotifyModal();
+});
+document.getElementById('add-item-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeAddItemModal();
+});
+
+/* ===================================================================
+   ADD ITEM MODAL
+   =================================================================== */
+function openAddItemModal() {
+  const list = document.getElementById('add-item-list');
+  list.innerHTML = '';
+
+  // Group products by category
+  const cats = ['interior','exterior','wood-metal','waterproofing'];
+  const catLabels = {interior:'Interior',exterior:'Exterior','wood-metal':'Wood & Metal',waterproofing:'Waterproofing'};
+
+  cats.forEach(cat => {
+    const prods = products.filter(p => p.category === cat);
+    if (prods.length === 0) return;
+    list.innerHTML += `<p class="eyebrow" style="margin-top:1rem;margin-bottom:0.5rem">${catLabels[cat]}</p>`;
+    prods.forEach(p => {
+      list.innerHTML += `
+        <div style="margin-bottom:0.5rem">
+          <div style="font-family:var(--font-structural);font-weight:600;font-size:0.9rem;margin-bottom:0.3rem">${p.name}</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.4rem">
+            ${p.shades.slice(0,5).map(s => `
+              <div style="width:24px;height:24px;border-radius:4px;background:${s.hex};cursor:pointer;border:1px solid rgba(26,14,18,0.1);${isLightColor(s.hex)?'border-color:rgba(26,14,18,0.15)':''}"
+                title="${s.name} (${s.code})"></div>
+            `).join('')}
+            ${p.shades.length > 5 ? `<span style="font-size:0.7rem;color:rgba(26,14,18,0.4);line-height:24px">+${p.shades.length-5}</span>` : ''}
+          </div>
+          <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
+            ${p.packSizes.map(sz => `
+              <button class="btn btn-action btn-sm" style="padding:0.3rem 0.6rem;font-size:0.72rem"
+                onclick="addToBookingFromModal('${p.id}','${p.shades[0].code}',${sz})">${sz}L — ₹${sz * p.pricePerLiter}</button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    });
+  });
+
+  // Add hardware section
+  list.innerHTML += `<p class="eyebrow" style="margin-top:1rem;margin-bottom:0.5rem">Home Essentials</p>`;
+  list.innerHTML += `<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">` +
+    hardwareItems.slice(0,8).map(hw => `
+      <button style="text-align:left;padding:0.5rem;border:1px solid rgba(26,14,18,0.08);border-radius:var(--radius);cursor:pointer;background:#fff;font-size:0.78rem;transition:all var(--transition)"
+        onmouseover="this.style.borderColor='var(--sky-surge)'" onmouseout="this.style.borderColor='rgba(26,14,18,0.08)'"
+        onclick="addHardwareToBooking('${hw.id}')">
+        <span style="font-family:var(--font-structural);font-weight:500;display:block">${hw.name}</span>
+        <span style="color:var(--sky-surge);font-family:var(--font-structural);font-weight:600">₹${hw.price}</span>
+      </button>
+    `).join('') + `</div>`;
+
+  document.getElementById('add-item-modal').classList.add('open');
+}
+
+function closeAddItemModal() {
+  document.getElementById('add-item-modal').classList.remove('open');
+}
+
+function addToBookingFromModal(productId, shadeCode, packSize) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+  const shade = product.shades.find(s => s.code === shadeCode) || product.shades[0];
+
+  bookingState.items = bookingState.items.filter(i =>
+    !(i.productId === productId && i.shadeCode === shadeCode && i.size === packSize)
+  );
+
+  bookingState.items.push({
+    productId,
+    name: product.name,
+    shade: shade.name + ' (' + shade.code + ')',
+    shadeHex: shade.hex,
+    shadeCode: shade.code,
+    size: packSize,
+    price: packSize * product.pricePerLiter
+  });
+
+  closeAddItemModal();
+  renderBookingStep();
+  showToast('Item added to booking');
+}
+
+function addHardwareToBooking(hwId) {
+  const hw = hardwareItems.find(h => h.id === hwId);
+  if (!hw) return;
+
+  bookingState.items = bookingState.items.filter(i => i.hwId !== hwId);
+
+  bookingState.items.push({
+    hwId: hw.id,
+    name: hw.name,
+    shade: 'Hardware',
+    shadeHex: '#E8E0D0',
+    size: 1,
+    price: hw.price
+  });
+
+  closeAddItemModal();
+  renderBookingStep();
+  showToast('Item added to booking');
+}
+
+/* ===================================================================
+   FAQ TOGGLE
+   =================================================================== */
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const wasOpen = item.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+/* ===================================================================
+   SCROLL ANIMATIONS — IntersectionObserver
+   =================================================================== */
+let scrollObserver = null;
+
+function initScrollAnimations() {
+  if (scrollObserver) scrollObserver.disconnect();
+
+  const els = document.querySelectorAll('.page-view.active .anim-in');
+  if (!els.length) return;
+
+  scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => {
+    el.classList.remove('visible');
+    scrollObserver.observe(el);
+  });
+}
+
+/* ===================================================================
+   TOAST SYSTEM
+   =================================================================== */
+let toastTimeout = null;
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ===================================================================
+   OWNER DASHBOARD
+   =================================================================== */
+function renderOwnerDashboard() {
+  const bookings = JSON.parse(localStorage.getItem('colorvault_bookings') || '[]');
+
+  // Stats
+  const total = bookings.length;
+  const pending = bookings.filter(b => b.status === 'pending').length;
+  const picked = bookings.filter(b => b.status === 'picked').length;
+  const revenue = bookings.reduce((s, b) => s + (b.total || 0), 0);
+
+  document.getElementById('owner-stats').innerHTML = `
+    <div class="owner-stat"><div class="os-num">${total}</div><div class="os-label">Total Bookings</div></div>
+    <div class="owner-stat"><div class="os-num">${pending}</div><div class="os-label">Pending</div></div>
+    <div class="owner-stat"><div class="os-num">${picked}</div><div class="os-label">Picked Up</div></div>
+    <div class="owner-stat"><div class="os-num">₹${(revenue/1000).toFixed(1)}k</div><div class="os-label">Estimated Revenue</div></div>
+  `;
+
+  const listEl = document.getElementById('owner-bookings-list');
+
+  if (bookings.length === 0) {
+    listEl.innerHTML = `<div class="owner-empty"><i class="fa-solid fa-inbox" style="font-size:2rem;margin-bottom:0.5rem;display:block"></i>No bookings yet. Bookings will appear here when customers submit them.</div>`;
+    return;
+  }
+
+  let tableHtml = `<div style="overflow-x:auto"><table class="owner-table">
+    <thead><tr>
+      <th>ID</th><th>Items</th><th>Date</th><th>Time</th><th>Customer</th><th>Total</th><th>Status</th><th>Action</th>
+    </tr></thead><tbody>`;
+
+  bookings.forEach((b, idx) => {
+    const itemSummary = b.items.map(i => {
+      const swatch = `<span class="ot-swatch" style="background:${i.shadeHex}"></span>`;
+      return `<span class="ot-shade">${swatch} ${i.name} ${i.size}L</span>`;
+    }).join('<br>');
+
+    tableHtml += `<tr>
+      <td style="font-family:var(--font-structural);font-size:0.78rem;font-weight:500;white-space:nowrap">${b.id}</td>
+      <td style="min-width:180px">${itemSummary}</td>
+      <td style="white-space:nowrap;font-size:0.85rem">${b.date ? formatDate(b.date) : '—'}</td>
+      <td style="font-family:var(--font-structural);font-size:0.85rem">${b.time || '—'}</td>
+      <td><strong style="font-size:0.85rem">${b.name || '—'}</strong><br><span style="font-size:0.78rem;color:rgba(26,14,18,0.5)">${b.phone || ''}</span></td>
+      <td style="font-family:var(--font-structural);font-weight:600">₹${b.total || 0}</td>
+      <td><span class="ot-status ${b.status}">${b.status === 'pending' ? 'Pending' : 'Picked Up'}</span></td>
+      <td>${b.status === 'pending'
+        ? `<button class="btn btn-action btn-sm" style="padding:0.3rem 0.6rem;font-size:0.7rem" onclick="markPicked(${idx})">Picked Up</button>`
+        : '<span style="font-size:0.8rem;color:rgba(26,14,18,0.3)">Done</span>'
+      }</td>
+    </tr>`;
+  });
+
+  tableHtml += `</tbody></table></div>`;
+  listEl.innerHTML = tableHtml;
+}
+
+function markPicked(index) {
+  let bookings = JSON.parse(localStorage.getItem('colorvault_bookings') || '[]');
+  if (bookings[index]) {
+    bookings[index].status = 'picked';
+    localStorage.setItem('colorvault_bookings', JSON.stringify(bookings));
+    renderOwnerDashboard();
+    showToast('Marked as picked up');
+  }
+}
+
+function exportBookings() {
+  const bookings = JSON.parse(localStorage.getItem('colorvault_bookings') || '[]');
+  if (bookings.length === 0) {
+    showToast('No bookings to export');
+    return;
+  }
+
+  let text = `BOOKINGS EXPORT — ${SHOP.name}\nGenerated: ${new Date().toLocaleString()}\n${'='.repeat(60)}\n\n`;
+
+  bookings.forEach(b => {
+    text += `ID: ${b.id}\n`;
+    text += `Status: ${b.status}\n`;
+    text += `Date: ${b.date ? formatDate(b.date) : 'N/A'}  Time: ${b.time || 'N/A'}\n`;
+    text += `Customer: ${b.name}  Phone: ${b.phone}\n`;
+    b.items.forEach(i => {
+      text += `  → ${i.name} | ${i.shade} | ${i.size}L | ₹${i.price}\n`;
+    });
+    text += `Total: ₹${b.total}\n`;
+    if (b.notes) text += `Notes: ${b.notes}\n`;
+    text += `Created: ${b.createdAt}\n`;
+    text += `${'-'.repeat(40)}\n\n`;
+  });
+
+  // Create downloadable file
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bookings-${new Date().toISOString().split('T')[0]}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('Bookings exported');
+}
+
+function clearAllBookings() {
+  const bookings = JSON.parse(localStorage.getItem('colorvault_bookings') || '[]');
+  if (bookings.length === 0) {
+    showToast('No bookings to clear');
+    return;
+  }
+  // Use a custom confirm approach — simple double-click guard
+  const btn = event.target.closest('button');
+  if (btn.dataset.confirming) {
+    localStorage.removeItem('colorvault_bookings');
+    renderOwnerDashboard();
+    showToast('All bookings cleared');
+    btn.dataset.confirming = '';
+    btn.innerHTML = '<i class="fa-solid fa-trash"></i> Clear All';
+  } else {
+    btn.dataset.confirming = 'true';
+    btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Click Again to Confirm';
+    setTimeout(() => {
+      btn.dataset.confirming = '';
+      btn.innerHTML = '<i class="fa-solid fa-trash"></i> Clear All';
+    }, 3000);
+  }
+}
+
+/* ===================================================================
+   INIT — Boot the app
+   =================================================================== */
+(function init() {
+  // Handle confirmation page render
+  const originalShowPage = showPage;
+
+  // Override to handle confirmation rendering
+  const _showPage = showPage;
+  showPage = function(path) {
+    _showPage(path);
+    if (path.includes('confirmed') && lastBooking) {
+      renderConfirmation();
+    }
+  };
+
+  // Initial route
+  const hash = window.location.hash || '#/';
+  showPage(hash);
+})();
+</script>
+</body>
+</html>
